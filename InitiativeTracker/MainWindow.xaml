@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:InitiativeTracker"
         mc:Ignorable="d"
         Title="Initiative Tracker" Height="450" Width="800">
+    <Window.DataContext>
+        <Binding Source="local:InitiativeTrackerViewModel"/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>  <!-- Play Character list -->
@@ -14,7 +17,41 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="File">
+                <MenuItem Header="Open Encounter"/>
+                <MenuItem Header="Save Encounter"/>
+                <MenuItem Header="Save Encounter As"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="I Believe In You"/>
+            </MenuItem>
+        </Menu>
+        <Label Grid.Row="1" Grid.Column="0"
+               Content="Playable Characters" FontWeight="Bold"
+               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+               Background="#71B48D"/>
+
+        <Label Grid.Row="1" Grid.Column="1"
+               Content="Combat Tracker" FontWeight="Bold" Foreground="WhiteSmoke"
+               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+               Background="{StaticResource TitleBackground}"/>
+
+        <Label Grid.Row="1" Grid.Column="2"
+               Content="Enemies" FontWeight="Bold"
+               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+               Background="#C06E52"/>
+
+        <ListBox Grid.Row="2" Grid.Column="0" Background="#396559">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:CharacterBox/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
     </Grid>
 </Window>

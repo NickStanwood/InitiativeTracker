@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="InitiativeTracker.CharacterBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitiativeTracker"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="175">
+    <Border BorderBrush="DarkSlateGray" BorderThickness="1">
+        <Grid Margin="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" 
+                   HorizontalContentAlignment="Center" 
+                   Content="{Binding Name}" FontWeight="Bold"
+                   Background="LightGray"/>
+
+            <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Initiative Roll"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3"                     
+                     Text="{Binding InitiativeRoll}"
+                     ToolTip="Include the Initiative Bonus in this roll."/>
+
+            <Label Grid.Row="2" HorizontalContentAlignment="Right" Content="Initiative Bonus"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3"
+                     Text="{Binding InitiativeBonus}" />
+        </Grid>
+    </Border>
+</UserControl>

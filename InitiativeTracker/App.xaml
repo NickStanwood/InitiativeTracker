@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:InitiativeTracker"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="TitleBackground">#001524</SolidColorBrush>
+            <SolidColorBrush x:Key="NegativeSpaceBackground">#D6DBD2</SolidColorBrush>
+            <SolidColorBrush x:Key="Error">#6B0504</SolidColorBrush>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
