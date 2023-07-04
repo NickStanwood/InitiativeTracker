@@ -9,7 +9,7 @@
     <Window.DataContext>
         <Binding Source="local:InitiativeTrackerViewModel"/>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="{StaticResource NegativeSpace}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>  <!-- Play Character list -->
             <ColumnDefinition Width="2*"/> <!-- Initiative Tracker -->
@@ -17,6 +17,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -33,19 +34,31 @@
         <Label Grid.Row="1" Grid.Column="0"
                Content="Playable Characters" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-               Background="#71B48D"/>
+               Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
         <Label Grid.Row="1" Grid.Column="1"
-               Content="Combat Tracker" FontWeight="Bold" Foreground="WhiteSmoke"
+               Content="Combat Tracker" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-               Background="{StaticResource TitleBackground}"/>
+               Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
         <Label Grid.Row="1" Grid.Column="2"
                Content="Enemies" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-               Background="#C06E52"/>
+               Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
-        <ListBox Grid.Row="2" Grid.Column="0" Background="#396559">
+        <Button Grid.Row="2" Grid.Column="0" Click="BtnAddCharacter_Click">Add Character</Button>
+        <Button Grid.Row="2" Grid.Column="1">Start Combat</Button>
+        <Grid Grid.Row="2" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0">Add Enemy</Button>
+            <Button Grid.Column="1">Roll Initiative</Button>
+        </Grid>
+        
+        <ListBox Grid.Row="3" Grid.Column="0" Background="{StaticResource NegativeSpace}"
+                 ItemsSource="{Binding PlayableCharacters}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:CharacterBox/>

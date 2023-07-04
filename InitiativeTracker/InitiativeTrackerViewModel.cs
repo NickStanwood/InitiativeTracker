@@ -11,5 +11,10 @@ namespace InitiativeTracker
     {
         public ObservableCollection<Character> PlayableCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Character> EnemyCharacters { get; set; } = new ObservableCollection<Character>();
+
+        public InitiativeTrackerViewModel()
+        {
+            PlayableCharacters.Add(new Character());
+        }
     }
 }
