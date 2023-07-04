@@ -20,9 +20,22 @@ namespace InitiativeTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        InitiativeTrackerViewModel Model;
         public MainWindow()
         {
             InitializeComponent();
+            Model = new InitiativeTrackerViewModel();
+            this.DataContext = Model;
+        }
+
+        private void BtnAddCharacter_Click(object sender, RoutedEventArgs e)
+        {
+            NewCharacterWindow newCharWin = new NewCharacterWindow();
+            bool? result = newCharWin.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                Model.PlayableCharacters.Add(newCharWin.Character);
+            }
         }
     }
 }
