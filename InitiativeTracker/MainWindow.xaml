@@ -61,10 +61,18 @@
                  ItemsSource="{Binding PlayableCharacters}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:CharacterBox/>
+                    <local:CharacterBox MouseDown="CharacterBoxPC_MouseDown"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
+        <ListBox Grid.Row="3" Grid.Column="2" Background="{StaticResource NegativeSpace}"
+                 ItemsSource="{Binding EnemyCharacters}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:CharacterBox/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

@@ -26,6 +26,15 @@ namespace InitiativeTracker
             InitializeComponent();
 
             Character = new Character();
+            DataContext = Character;
+        }
+
+        public NewCharacterWindow(Character character)
+        {
+            InitializeComponent();
+
+            Character = character;
+            DataContext = Character;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

@@ -37,5 +37,17 @@ namespace InitiativeTracker
                 Model.PlayableCharacters.Add(newCharWin.Character);
             }
         }
+
+        private void CharacterBoxPC_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CharacterBox cb = sender as CharacterBox;
+            Character c = cb.GetBoundCharacter();
+            if (c != null)
+            {
+                NewCharacterWindow newCharWin = new NewCharacterWindow(c);
+                bool? result = newCharWin.ShowDialog();
+                //TODO need to check if the result was a success and reset 
+            }
+        }
     }
 }

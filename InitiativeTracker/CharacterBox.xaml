@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.ColumnSpan="2" 
-                   HorizontalContentAlignment="Center" 
+                   HorizontalContentAlignment="Left" 
                    Content="{Binding Name}" FontWeight="Bold" Foreground="{StaticResource ActiveText}"/>
 
             <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Initiative Roll"/>
