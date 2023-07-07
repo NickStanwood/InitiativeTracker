@@ -19,10 +19,15 @@ namespace InitiativeTracker
     /// Interaction logic for CharacterBox.xaml
     /// </summary>
     public partial class CharacterBox : UserControl
-    {
+    {        
         public CharacterBox()
         {
             InitializeComponent();
+        }
+
+        public Character GetBoundCharacter()
+        {
+            return DataContext as Character;
         }
     }
 }
