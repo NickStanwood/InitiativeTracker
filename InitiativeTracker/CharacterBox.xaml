@@ -26,9 +26,9 @@
                      Text="{Binding InitiativeRoll}"
                      ToolTip="Include the Initiative Modifier in this roll."/>
 
-            <Label Grid.Row="2" HorizontalContentAlignment="Right" Content="Initiative Bonus"/>
+            <Label Grid.Row="2" HorizontalContentAlignment="Right" Content="Initiative Modifier"/>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="3"
-                     Text="{Binding InitiativeBonus}" />
+                     Text="{Binding InitiativeModifier}" />
         </Grid>
     </Border>
 </UserControl>

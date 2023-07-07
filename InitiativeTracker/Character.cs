@@ -29,5 +29,26 @@ namespace InitiativeTracker
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
+        public Character Clone()
+        {
+            Character c = new Character();
+            c.Name = Name;
+            c.AC = AC;
+            c.HP = HP;
+            c.InitiativeModifier = InitiativeModifier;
+            c.InitiativeRoll = InitiativeRoll;
+
+            return c;
+        }
+
+        public void CopyFrom(Character source)
+        {
+            Name = source.Name;
+            AC = source.AC;
+            HP = source.HP;
+            InitiativeModifier = source.InitiativeModifier;
+            InitiativeRoll = source.InitiativeRoll;
+        }
     }
 }

@@ -41,12 +41,17 @@ namespace InitiativeTracker
         private void CharacterBoxPC_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CharacterBox cb = sender as CharacterBox;
-            Character c = cb.GetBoundCharacter();
-            if (c != null)
+            Character original = cb.GetBoundCharacter();
+            if (original != null)
             {
-                NewCharacterWindow newCharWin = new NewCharacterWindow(c);
+                Character modified = original.Clone();
+                NewCharacterWindow newCharWin = new NewCharacterWindow(modified);
                 bool? result = newCharWin.ShowDialog();
-                //TODO need to check if the result was a success and reset 
+                if(result.HasValue && result.Value)
+                {
+                    //new character dialog was saved
+                    original.CopyFrom(modified);
+                }
             }
         }
     }
