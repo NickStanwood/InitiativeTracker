@@ -19,6 +19,8 @@
             <SolidColorBrush x:Key="ButtonText">#090D08</SolidColorBrush>
 
             <SolidColorBrush x:Key="Error">#6B0504</SolidColorBrush>
+            <SolidColorBrush x:Key="BadText">#FF0000</SolidColorBrush>
+            <SolidColorBrush x:Key="GoodText">#00AA00</SolidColorBrush>
 
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="3"/>

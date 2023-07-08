@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace InitiativeTracker
 {
+    public enum CharacterType
+    {
+        DMControlled,
+        PlayerControlled
+    }
+
     public class Character : INotifyPropertyChanged
     {
+        private CharacterType _type;
+        public CharacterType Type { get { return _type; } set { _type = value; Notify(nameof(Type)); } }
+
         private string _name;
         public string Name { get { return _name; } set { _name = value; Notify(nameof(Name)); } }
 
@@ -18,26 +27,27 @@ namespace InitiativeTracker
         private int _HP;
         public int HP { get { return _HP; } set { _HP = value; Notify(nameof(HP)); } }
 
-        private int _initiativeModifier;
-        public int InitiativeModifier { get { return _initiativeModifier; } set { _initiativeModifier = value; Notify(nameof(InitiativeModifier)); } }
-
-        private int _initiativeRoll;
-        public int InitiativeRoll { get { return _initiativeRoll; } set { _initiativeRoll = value; Notify(nameof(InitiativeRoll)); } }
-
+        private Initiative _initiative = new Initiative();
+        public Initiative Initiative { get { return _initiative; } set { _initiative = value; Notify(nameof(Initiative)); } }
         public event PropertyChangedEventHandler PropertyChanged;
         private void Notify(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
+        public Character(CharacterType type)
+        {
+            Type = type;
+            _initiative.PropertyChanged += (sender, e) => Notify(nameof(Initiative));
+        }
+
         public Character Clone()
         {
-            Character c = new Character();
+            Character c = new Character(Type);
             c.Name = Name;
             c.AC = AC;
             c.HP = HP;
-            c.InitiativeModifier = InitiativeModifier;
-            c.InitiativeRoll = InitiativeRoll;
+            c.Initiative = Initiative;
 
             return c;
         }
@@ -47,8 +57,7 @@ namespace InitiativeTracker
             Name = source.Name;
             AC = source.AC;
             HP = source.HP;
-            InitiativeModifier = source.InitiativeModifier;
-            InitiativeRoll = source.InitiativeRoll;
+            Initiative = source.Initiative;
         }
     }
 }

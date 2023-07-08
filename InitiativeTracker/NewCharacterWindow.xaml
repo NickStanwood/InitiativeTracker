@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:InitiativeTracker"
         mc:Ignorable="d"
         Title="New Character" Height="250" Width="300">
+    <Window.Resources>
+        <local:CharacterTypeVisibilityConverter x:Key="TypeVisibilityConverter" />
+    </Window.Resources>
+    
     <Grid Background="{StaticResource NegativeSpace}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -33,18 +37,18 @@
         <Label Grid.Row="0">Name</Label>
         <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbName" Text="{Binding Name}"/>
 
-        <Label Grid.Row="1">HP</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbHP" Text="{Binding HP}"/>
+        <Label Grid.Row="1" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">HP</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbHP" Text="{Binding HP}" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"/>
 
-        <Label Grid.Row="2">AC</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAC" Text="{Binding AC}"/>
+        <Label Grid.Row="2" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">AC</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAC" Text="{Binding AC}" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"/>
         
         <Label Grid.Row="3" ToolTip="Used to determine ties in Initiative Order.">Initiative Modifier</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="tbInitMod" Text="{Binding InitiativeModifier}"
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="tbInitMod" Text="{Binding Initiative.Modifier}"
                  ToolTip="Used to determine ties in Initiative Order."/>
 
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="20,0,20,0"
-                VerticalAlignment="Center"
+        <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="20,20,20,0"
+                VerticalAlignment="Top"
                 Click="BtnSave_Click">Save</Button>
     </Grid>
 </Window>

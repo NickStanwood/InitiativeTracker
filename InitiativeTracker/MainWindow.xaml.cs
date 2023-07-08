@@ -30,28 +30,47 @@ namespace InitiativeTracker
 
         private void BtnAddCharacter_Click(object sender, RoutedEventArgs e)
         {
-            NewCharacterWindow newCharWin = new NewCharacterWindow();
+            NewCharacterWindow newCharWin = new NewCharacterWindow(CharacterType.PlayerControlled);
             bool? result = newCharWin.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                Model.PlayableCharacters.Add(newCharWin.Character);
+                Model.PlayerCharacters.Add(newCharWin.Character);
             }
         }
 
-        private void CharacterBoxPC_MouseDown(object sender, MouseButtonEventArgs e)
+        private void BtnAddDMCharacter_Click(object sender, RoutedEventArgs e)
         {
-            CharacterBox cb = sender as CharacterBox;
+            NewCharacterWindow newCharWin = new NewCharacterWindow(CharacterType.DMControlled);
+            bool? result = newCharWin.ShowDialog();
+            if (result.HasValue && result.Value)
+            {
+                Model.DMCharacters.Add(newCharWin.Character);
+            }
+
+        }
+
+        private void CharacterBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CharacterBox cb = (CharacterBox)sender;
             Character original = cb.GetBoundCharacter();
             if (original != null)
             {
                 Character modified = original.Clone();
                 NewCharacterWindow newCharWin = new NewCharacterWindow(modified);
                 bool? result = newCharWin.ShowDialog();
-                if(result.HasValue && result.Value)
+                if (result.HasValue && result.Value)
                 {
                     //new character dialog was saved
                     original.CopyFrom(modified);
                 }
+            }
+        }
+
+        private void BtnRollInit_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(Character c in Model.DMCharacters)
+            {
+                c.Initiative.Roll();
             }
         }
     }
