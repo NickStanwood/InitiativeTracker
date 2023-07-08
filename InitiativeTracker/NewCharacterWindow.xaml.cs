@@ -14,18 +14,24 @@ using System.Windows.Shapes;
 
 namespace InitiativeTracker
 {
-    /// <summary>
-    /// Interaction logic for NewCharacterWindow.xaml
-    /// </summary>
     public partial class NewCharacterWindow : Window
     {
         public Character Character { get; set; }
 
-        public NewCharacterWindow()
+        public NewCharacterWindow(CharacterType type)
         {
             InitializeComponent();
 
-            Character = new Character();
+            Character = new Character(type);
+            if(type == CharacterType.PlayerControlled)
+            {
+                Title = "New Player Character";
+            }
+            else
+            {
+                Title = "New DM Character";
+            }
+
             DataContext = Character;
         }
 
@@ -34,6 +40,14 @@ namespace InitiativeTracker
             InitializeComponent();
 
             Character = character;
+            if (character.Type == CharacterType.PlayerControlled)
+            {
+                Title = "Modify Player Character";
+            }
+            else
+            {
+                Title = "Modify DM Character";
+            }
             DataContext = Character;
         }
 

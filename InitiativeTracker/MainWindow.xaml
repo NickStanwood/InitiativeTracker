@@ -13,7 +13,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>  <!-- Play Character list -->
             <ColumnDefinition Width="2*"/> <!-- Initiative Tracker -->
-            <ColumnDefinition Width="*"/>  <!-- Enemy List -->
+            <ColumnDefinition Width="*"/>  <!-- DM Character List -->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -32,7 +32,7 @@
             </MenuItem>
         </Menu>
         <Label Grid.Row="1" Grid.Column="0"
-               Content="Playable Characters" FontWeight="Bold"
+               Content="Player Characters" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
@@ -42,7 +42,7 @@
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
         <Label Grid.Row="1" Grid.Column="2"
-               Content="Enemies" FontWeight="Bold"
+               Content="DM Characters" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
@@ -53,24 +53,24 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0">Add Enemy</Button>
-            <Button Grid.Column="1">Roll Initiative</Button>
+            <Button Grid.Column="0" Click="BtnAddDMCharacter_Click">Add Character</Button>
+            <Button Grid.Column="1" Click="BtnRollInit_Click">Roll Initiative</Button>
         </Grid>
         
         <ListBox Grid.Row="3" Grid.Column="0" Background="{StaticResource NegativeSpace}"
-                 ItemsSource="{Binding PlayableCharacters}" HorizontalContentAlignment="Stretch">
+                 ItemsSource="{Binding PlayerCharacters}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:CharacterBox MouseDown="CharacterBoxPC_MouseDown"/>
+                    <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
         <ListBox Grid.Row="3" Grid.Column="2" Background="{StaticResource NegativeSpace}"
-                 ItemsSource="{Binding EnemyCharacters}" HorizontalContentAlignment="Stretch">
+                 ItemsSource="{Binding DMCharacters}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <local:CharacterBox/>
+                    <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

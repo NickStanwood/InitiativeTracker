@@ -9,12 +9,11 @@ namespace InitiativeTracker
 {
     internal class InitiativeTrackerViewModel
     {
-        public ObservableCollection<Character> PlayableCharacters { get; set; } = new ObservableCollection<Character>();
-        public ObservableCollection<Character> EnemyCharacters { get; set; } = new ObservableCollection<Character>();
+        public ObservableCollection<Character> PlayerCharacters { get; set; } = new ObservableCollection<Character>();
+        public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
 
         public InitiativeTrackerViewModel()
         {
-            PlayableCharacters.Add(new Character());
         }
     }
 }
