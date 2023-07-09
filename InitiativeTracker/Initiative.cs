@@ -11,6 +11,8 @@ namespace InitiativeTracker
     {
 
         private int _rawRoll;
+        public int RawRoll { get { return _rawRoll; } }
+
         private int _result;
         public int Result
         {
@@ -29,7 +31,7 @@ namespace InitiativeTracker
             get { return _modifier; }
             set
             {
-                if(_hasRolled)
+                if(Result != 0)
                 {
                     int delta = value - _modifier;
                     _modifier = value;
@@ -46,7 +48,6 @@ namespace InitiativeTracker
         public bool IsCriticalFailure { get { return _rawRoll == 1; } }
         public bool IsCriticalSuccess { get { return _rawRoll == 20; } }
 
-        private bool _hasRolled = false;
         public Initiative()
         {
             _result = 0;
@@ -62,13 +63,8 @@ namespace InitiativeTracker
 
         public int Roll()
         {
-            _hasRolled = true;
             Result = _modifier + Dice.RollD20();
             return Result;
-        }
-
-        public void UpdateModifer(int modifier)
-        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -9,11 +9,11 @@
     <UserControl.Resources>
         <local:InitiativeColourConverter x:Key="InitiativeColourConverter" />
         <local:InitiativeFontWeightConverter x:Key="InitiativeWeightConverter"/>
+        <local:InitiativeMathTextConverter x:Key="InitiativeMathConverter"/>
     </UserControl.Resources>
     <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1">
         <Grid Margin="2" Background="{StaticResource ActiveBackground}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
@@ -25,16 +25,14 @@
                    HorizontalContentAlignment="Center" 
                    Content="{Binding Name}" FontWeight="Bold" Foreground="{StaticResource ActiveText}"/>
 
-            <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Initiative Roll"/>
+            <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Initiative Roll" 
+                   ToolTip="Include the Initiative Modifier in this roll."/>
+
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3"                     
                      Text="{Binding Path=Initiative.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Foreground="{Binding Path=Initiative, Converter={StaticResource InitiativeColourConverter}, UpdateSourceTrigger=PropertyChanged}"
                      FontWeight="{Binding Path=Initiative, Converter={StaticResource InitiativeWeightConverter}}"
-                     ToolTip="Include the Initiative Modifier in this roll."/>
-
-            <!--<Label Grid.Row="2" HorizontalContentAlignment="Right" Content="Initiative Modifier"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3"
-                     Text="{Binding Initiative.Modifier}" />-->
+                     ToolTip="{Binding Path=Initiative, Converter={StaticResource InitiativeMathConverter}}"/>
         </Grid>
     </Border>
 </UserControl>
