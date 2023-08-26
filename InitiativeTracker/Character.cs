@@ -18,6 +18,9 @@ namespace InitiativeTracker
         private CharacterType _type;
         public CharacterType Type { get { return _type; } set { _type = value; Notify(nameof(Type)); } }
 
+        private bool _isEnabled = true;
+        public bool IsEnabled { get { return _isEnabled; } set { _isEnabled = value; Notify(nameof(IsEnabled)); } }
+
         private string _name;
         public string Name { get { return _name; } set { _name = value; Notify(nameof(Name)); } }
 
