@@ -73,5 +73,10 @@ namespace InitiativeTracker
                 c.Initiative.Roll();
             }
         }
+
+        private void BtnStartCombat_Click(object sender, RoutedEventArgs e)
+        {
+            Model.CreateCombatList();
+        }
     }
 }

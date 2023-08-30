@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="InitiativeTracker.CombatBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitiativeTracker"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200">
+    <UserControl.Resources>
+        <local:CharacterTypeVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1">
+        <Grid>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Character.IsEnabled}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ActiveBackground}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Character.IsEnabled}" Value="False">
+                            <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0" HorizontalContentAlignment="Right"
+                   Content="{Binding Character.Name}" FontWeight="Bold" Foreground="{StaticResource ActiveText}"/>
+
+            <CheckBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0"
+                      IsChecked="{Binding Path=Character.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Health"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3"
+                     Text="{Binding Health}" />
+
+            <Label Grid.Row="2" HorizontalContentAlignment="Right"
+                   Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                    Content="AC"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="3"
+                     Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                     Text="{Binding Character.AC}" />
+        </Grid>
+    </Border>
+</UserControl>
