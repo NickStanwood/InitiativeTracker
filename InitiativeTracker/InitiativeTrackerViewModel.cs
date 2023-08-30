@@ -11,7 +11,7 @@ namespace InitiativeTracker
     {
         public ObservableCollection<Character> PlayerCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
-        public ObservableCollection<CombatStats> Combatants { get; set; } = new ObservableCollection<CombatStats>();
+        public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
 
         public InitiativeTrackerViewModel()
         {
@@ -50,7 +50,7 @@ namespace InitiativeTracker
             Combatants.Clear();
             foreach (Character c in characters)
             {
-                Combatants.Add(new CombatStats(c));
+                Combatants.Add(new Combatant(c));
             }
         }
     }

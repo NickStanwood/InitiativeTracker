@@ -12,7 +12,7 @@
         <local:InitiativeMathTextConverter x:Key="InitiativeMathConverter"/>
     </UserControl.Resources>
     <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1">
-        <Grid Margin="2">
+        <Grid>
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
