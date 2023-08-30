@@ -41,14 +41,14 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type CheckBox}">
                             <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1" Width="14" Height="14" Background="{StaticResource ControlBackground}">
-                                <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="innerSquare"/>
+                                <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="checkIndicator"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
-                                    <Setter TargetName="innerSquare" Property="Fill" Value="{StaticResource ButtonBackground}"/>
+                                    <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource ButtonBackground}"/>
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="False">
-                                    <Setter TargetName="innerSquare" Property="Fill" Value="{StaticResource InactiveBackground}"/>
+                                    <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource InactiveBackground}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

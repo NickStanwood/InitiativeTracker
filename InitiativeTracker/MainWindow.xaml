@@ -47,7 +47,7 @@
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
         <Button Grid.Row="2" Grid.Column="0" Click="BtnAddCharacter_Click">Add Character</Button>
-        <Button Grid.Row="2" Grid.Column="1">Start Combat</Button>
+        <Button Grid.Row="2" Grid.Column="1" Click="BtnStartCombat_Click">Start Combat</Button>
         <Grid Grid.Row="2" Grid.Column="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -57,6 +57,7 @@
             <Button Grid.Column="1" Click="BtnRollInit_Click">Roll Initiative</Button>
         </Grid>
         
+        <!-- Character list -->
         <ListBox Grid.Row="3" Grid.Column="0" Background="{StaticResource NegativeSpace}"
                  ItemsSource="{Binding PlayerCharacters}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
@@ -65,7 +66,19 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
+        
+        <!-- Combat List -->
+        <ListBox Grid.Row="3" Grid.Column="1" Background="{StaticResource NegativeSpace}"
+                 ItemsSource="{Binding Combatants}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:CombatBox/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        
+        
+        <!-- NPC list -->
         <ListBox Grid.Row="3" Grid.Column="2" Background="{StaticResource NegativeSpace}"
                  ItemsSource="{Binding DMCharacters}" HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
