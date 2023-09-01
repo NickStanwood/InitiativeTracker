@@ -6,18 +6,19 @@
         xmlns:local="clr-namespace:InitiativeTracker"
         mc:Ignorable="d"
         Title="Initiative Tracker" Height="450" Width="800">
+    <Window.Resources>
+        <local:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </Window.Resources>
     <Window.DataContext>
         <Binding Source="local:InitiativeTrackerViewModel"/>
     </Window.DataContext>
-    <Grid Background="{StaticResource NegativeSpace}">
+    <Grid Background="{StaticResource ControlBackground}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>  <!-- Play Character list -->
-            <ColumnDefinition Width="2*"/> <!-- Initiative Tracker -->
-            <ColumnDefinition Width="*"/>  <!-- DM Character List -->
+            <ColumnDefinition Width="{Binding CharacterWidth}"/>  <!-- Play Character list -->
+            <ColumnDefinition Width="{Binding CombatWidth}"/> <!-- Initiative Tracker -->
+            <ColumnDefinition Width="{Binding CharacterWidth}"/>  <!-- DM Character List -->
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -31,61 +32,91 @@
                 <MenuItem Header="I Believe In You"/>
             </MenuItem>
         </Menu>
-        <Label Grid.Row="1" Grid.Column="0"
+
+        <!-- Character list -->
+        <Border Grid.Row="1" Grid.Column="0" Margin="3" IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
                Content="Player Characters" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
+                <Button Grid.Row="1" Margin="0,3,0,3" Click="BtnAddCharacter_Click">Add Character</Button>
 
-        <Label Grid.Row="1" Grid.Column="1"
+                <ListBox Grid.Row="2"
+                 ItemsSource="{Binding PlayerCharacters}" HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+
+        <!-- Combat List -->
+        <Border Grid.Row="1" Grid.Column="1" Margin="3" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
                Content="Combat Tracker" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
+                <Button Grid.Row="1" Margin="0,3,0,3" Click="BtnStartCombat_Click">Start Combat</Button>
 
-        <Label Grid.Row="1" Grid.Column="2"
+                <ListBox Grid.Row="2"
+                 ItemsSource="{Binding Combatants}" HorizontalContentAlignment="Stretch"
+                         IsEnabled="{Binding CombatRunning}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:CombatBox/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
+
+
+        <!-- NPC list -->
+        <Border Grid.Row="1" Grid.Column="2" Margin="3" IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
                Content="DM Characters" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
                Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
 
-        <Button Grid.Row="2" Grid.Column="0" Click="BtnAddCharacter_Click">Add Character</Button>
-        <Button Grid.Row="2" Grid.Column="1" Click="BtnStartCombat_Click">Start Combat</Button>
-        <Grid Grid.Row="2" Grid.Column="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Click="BtnAddDMCharacter_Click">Add Character</Button>
-            <Button Grid.Column="1" Click="BtnRollInit_Click">Roll Initiative</Button>
-        </Grid>
-        
-        <!-- Character list -->
-        <ListBox Grid.Row="3" Grid.Column="0" Background="{StaticResource NegativeSpace}"
-                 ItemsSource="{Binding PlayerCharacters}" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        
-        <!-- Combat List -->
-        <ListBox Grid.Row="3" Grid.Column="1" Background="{StaticResource NegativeSpace}"
-                 ItemsSource="{Binding Combatants}" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:CombatBox/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        
-        
-        <!-- NPC list -->
-        <ListBox Grid.Row="3" Grid.Column="2" Background="{StaticResource NegativeSpace}"
+                <Grid Grid.Row="1" Margin="0,3,0,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Margin="0,0,3,0" Click="BtnAddDMCharacter_Click">Add Character</Button>
+                    <Button Grid.Column="1" Click="BtnRollInit_Click">Roll Initiative</Button>
+                </Grid>
+
+                <ListBox Grid.Row="2"
                  ItemsSource="{Binding DMCharacters}" HorizontalContentAlignment="Stretch">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
