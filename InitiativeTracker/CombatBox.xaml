@@ -9,20 +9,8 @@
     <UserControl.Resources>
         <local:CharacterTypeVisibilityConverter x:Key="VisibilityConverter"/>
     </UserControl.Resources>
-    <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1">
+    <Border Style="{StaticResource Card}">
         <Grid>
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Character.IsEnabled}" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ActiveBackground}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=Character.IsEnabled}" Value="False">
-                            <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>

@@ -20,6 +20,7 @@
 
             <SolidColorBrush x:Key="ButtonBorder">#090D08</SolidColorBrush>
             <SolidColorBrush x:Key="ButtonBackground">#1B998B</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonInactive">#AAB7B5</SolidColorBrush>
             <SolidColorBrush x:Key="ButtonText">#090D08</SolidColorBrush>
 
             <SolidColorBrush x:Key="Error">#6B0504</SolidColorBrush>
@@ -47,18 +48,45 @@
                                     <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource ButtonBackground}"/>
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="False">
-                                    <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource InactiveBackground}"/>
+                                    <Setter TargetName="checkIndicator" Property="Visibility" Value="Hidden"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource ButtonInactive}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style>
+            
             <Style TargetType="ListBox">
-                <Setter Property="Background" Value="{StaticResource NegativeSpace}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBox">
+                            <Border Name="Border" BorderThickness="1" CornerRadius="2" BorderBrush="{StaticResource ActiveBorder}" Background="{StaticResource NegativeSpace}">
+                                <ScrollViewer Margin="0" Focusable="false">
+                                    <StackPanel Margin="2" IsItemsHost="True" />
+                                </ScrollViewer>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource InactiveBackground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
+            <Style x:Key="Card" TargetType="Border">
+                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorder}"/>
+                <Setter Property="BorderThickness" Value="1"/>
                 <Style.Triggers>
                     <Trigger Property="IsEnabled" Value="False">
                         <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="True">
+                        <Setter Property="Background" Value="{StaticResource ActiveBackground}"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>

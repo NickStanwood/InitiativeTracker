@@ -11,20 +11,8 @@
         <local:InitiativeFontWeightConverter x:Key="InitiativeWeightConverter"/>
         <local:InitiativeMathTextConverter x:Key="InitiativeMathConverter"/>
     </UserControl.Resources>
-    <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1">
+    <Border Style="{StaticResource Card}">
         <Grid>
-            <Grid.Style>
-                <Style TargetType="Grid">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                            <Setter Property="Background" Value="{StaticResource ActiveBackground}"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                            <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Grid.Style>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
