@@ -16,7 +16,7 @@
     <Window.DataContext>
         <Binding Source="local:InitiativeTrackerViewModel"/>
     </Window.DataContext>
-    <Grid Background="{StaticResource ControlBackground}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding CharacterWidth}"/>  <!-- Play Character list -->
             <ColumnDefinition Width="{Binding CombatWidth}"/> <!-- Initiative Tracker -->
@@ -45,10 +45,9 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0"
-               Content="Player Characters" FontWeight="Bold"
-               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-               Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
+                <Label Grid.Row="0" Style="{StaticResource titleText}"
+               Content="Player Characters"
+               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 <Button Grid.Row="1" Margin="0,3,0,3" Click="BtnAddCharacter_Click">Add Character</Button>
 
                 <ListBox Grid.Row="2"
@@ -70,10 +69,9 @@
                     <RowDefinition Height="{Binding CombatRunning, Converter={StaticResource EnableToZeroHeight}}"/>
                     <RowDefinition Height="{Binding CombatRunning, Converter={StaticResource EnableToMaxHeight}}"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0"
+                <Label Grid.Row="0" Style="{StaticResource titleText}"
                Content="Combat Tracker" FontWeight="Bold"
-               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-               Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
+               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 <Button Grid.Row="1"
                         Margin="20,3,20,3" Height="50"
                         IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}"
@@ -100,10 +98,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0"
-               Content="DM Characters" FontWeight="Bold"
-               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
-               Background="{StaticResource TitleBackground}"  Foreground="{StaticResource TitleText}"/>
+                <Label Grid.Row="0" Style="{StaticResource titleText}"
+               Content="DM Characters"
+               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
 
                 <Grid Grid.Row="1" Margin="0,3,0,3">
                     <Grid.ColumnDefinitions>

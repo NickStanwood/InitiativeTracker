@@ -17,11 +17,13 @@ namespace InitiativeTracker
             if (init != null)
             {
                 if (init.IsCriticalFailure)
-                    return App.Current.Resources["BadText"];
+                    return App.Current.Resources["Error"];
                 else if (init.IsCriticalSuccess)
-                    return App.Current.Resources["GoodText"];
+                    return App.Current.Resources["Success"];
+                else
+                    return App.Current.Resources["BodyText"];
             }
-            return App.Current.Resources["ActiveText"];
+            throw new InvalidOperationException();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

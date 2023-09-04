@@ -5,30 +5,82 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <SolidColorBrush x:Key="NegativeSpace">#F7EDDE</SolidColorBrush>
-            
-            <SolidColorBrush x:Key="TitleBackground">#001524</SolidColorBrush>
-            <SolidColorBrush x:Key="TitleText">#FFFFFF</SolidColorBrush>
-            
-            <SolidColorBrush x:Key="ActiveBorder">#090D08</SolidColorBrush>
-            <SolidColorBrush x:Key="ActiveBackground">#EFDBBD</SolidColorBrush>
-            <SolidColorBrush x:Key="ActiveText">#090D08</SolidColorBrush>
-            
-            <SolidColorBrush x:Key="InactiveBorder">#090D08</SolidColorBrush>
-            <SolidColorBrush x:Key="InactiveBackground">#00000000</SolidColorBrush>
-            <SolidColorBrush x:Key="InactiveText">#090D08</SolidColorBrush>
-
-            <SolidColorBrush x:Key="ButtonBorder">#090D08</SolidColorBrush>
-            <SolidColorBrush x:Key="ButtonBackground">#1B998B</SolidColorBrush>
-            <SolidColorBrush x:Key="ButtonInactive">#AAB7B5</SolidColorBrush>
-            <SolidColorBrush x:Key="ButtonText">#090D08</SolidColorBrush>
+            <Color x:Key="Text">#191210</Color>
+            <Color x:Key="Background">#FAF9EF</Color>   <!-- Window  -->
+            <Color x:Key="Primary">#F6F4E0</Color>      <!-- Decks   -->
+            <Color x:Key="Secondary">#E8E4B0</Color>    <!-- Cards   -->
+            <Color x:Key="Accent">#C3423F</Color>       <!-- Buttons -->
+            <Color x:Key="Trim">#5D1E1D</Color>
 
             <SolidColorBrush x:Key="Error">#6B0504</SolidColorBrush>
-            <SolidColorBrush x:Key="BadText">#FF0000</SolidColorBrush>
-            <SolidColorBrush x:Key="GoodText">#00AA00</SolidColorBrush>
+            <SolidColorBrush x:Key="Success">#28965A</SolidColorBrush>
+            
+            <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource Background}"/>
 
-            <SolidColorBrush x:Key="ControlBackground">#EEEEEE</SolidColorBrush>
+            <SolidColorBrush x:Key="TitleBackground" Color="#00000000"/>
+            <SolidColorBrush x:Key="TitleText" Color="{StaticResource Text}"/>
 
+            <SolidColorBrush x:Key="BodyBackground" Color="#00000000"/>
+            <SolidColorBrush x:Key="BodyText" Color="{StaticResource Text}"/>
+
+
+            <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource Trim}"/>
+            <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource Accent}"/>
+            <SolidColorBrush x:Key="ButtonText" Color="{StaticResource Text}"/>
+            <SolidColorBrush x:Key="ButtonInactive">#AAB7B5</SolidColorBrush>
+
+            <SolidColorBrush x:Key="InputBorder" Color="{StaticResource Trim}"/>
+            <SolidColorBrush x:Key="InputBackground">#00000000</SolidColorBrush>
+            <SolidColorBrush x:Key="InputText" Color="{StaticResource Text}"/>
+            <SolidColorBrush x:Key="InputInactive">#AAB7B5</SolidColorBrush>
+
+            <SolidColorBrush x:Key="DeckBorder" Color="{StaticResource Trim}"/>
+            <SolidColorBrush x:Key="DeckBackground" Color="{StaticResource Primary}"/>
+            <SolidColorBrush x:Key="DeckInactive">#00000000</SolidColorBrush>
+
+            <SolidColorBrush x:Key="CardBorder" Color="{StaticResource Trim}"/>
+            <SolidColorBrush x:Key="CardBackground" Color="{StaticResource Secondary}"/>
+            <SolidColorBrush x:Key="CardInactive">#00000000</SolidColorBrush>
+
+            <Style x:Key="WindowBase" TargetType="Window">
+                <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+            </Style>
+            <Style TargetType="{x:Type local:MainWindow}" BasedOn="{StaticResource WindowBase}"/>
+            <Style TargetType="{x:Type local:NewCharacterWindow}" BasedOn="{StaticResource WindowBase}"/>
+            
+            <Style TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource BodyBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource BodyText}"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
+            
+            <Style x:Key="headerText" TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource BodyBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource BodyText}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+
+            <Style x:Key="titleText" TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource TitleBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource TitleText}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource InputText}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource InputBorder}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+            
             <Style TargetType="Button">
                 <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
                 <Setter Property="Foreground" Value="{StaticResource ButtonText}"/>
@@ -45,7 +97,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type CheckBox}">
-                            <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1" CornerRadius="3" Width="14" Height="14" Background="{StaticResource ControlBackground}">
+                            <Border BorderBrush="{StaticResource ButtonBorder}" BorderThickness="1" CornerRadius="3" Width="14" Height="14" Background="{StaticResource InputBackground}">
                                 <Ellipse Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="checkIndicator"/>
                             </Border>
                             <ControlTemplate.Triggers>
@@ -77,15 +129,15 @@
             </Style>
             
             <Style x:Key="Card" TargetType="Border">
-                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorder}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource CardBorder}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="CornerRadius" Value="3"/>
                 <Style.Triggers>
                     <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
+                        <Setter Property="Background" Value="{StaticResource CardInactive}"/>
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="True">
-                        <Setter Property="Background" Value="{StaticResource ActiveBackground}"/>
+                        <Setter Property="Background" Value="{StaticResource CardBackground}"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -93,12 +145,12 @@
             <Style x:Key="Deck" TargetType="Border">
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="CornerRadius" Value="2"/>
-                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorder}"/>
-                <Setter Property="Background" Value="{StaticResource NegativeSpace}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource DeckBorder}"/>
+                <Setter Property="Background" Value="{StaticResource DeckBackground}"/>
                 <Setter Property="Padding" Value="3"/>
                 <Style.Triggers>
                     <Trigger Property="IsEnabled" Value="False">
-                        <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
+                        <Setter Property="Background" Value="{StaticResource DeckInactive}"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
