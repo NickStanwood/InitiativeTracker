@@ -34,14 +34,19 @@
                 <Setter Property="Foreground" Value="{StaticResource ButtonText}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource ButtonBorder}"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </Style.Resources>
             </Style>
 
             <Style TargetType="CheckBox">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type CheckBox}">
-                            <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1" Width="14" Height="14" Background="{StaticResource ControlBackground}">
-                                <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="checkIndicator"/>
+                            <Border BorderBrush="{StaticResource ActiveBorder}" BorderThickness="1" CornerRadius="3" Width="14" Height="14" Background="{StaticResource ControlBackground}">
+                                <Ellipse Width="8" Height="8" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="checkIndicator"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
@@ -63,16 +68,9 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ListBox">
-                            <Border Name="Border" BorderThickness="1" CornerRadius="2" BorderBrush="{StaticResource ActiveBorder}" Background="{StaticResource NegativeSpace}">
-                                <ScrollViewer Margin="0" Focusable="false">
-                                    <StackPanel Margin="2" IsItemsHost="True" />
-                                </ScrollViewer>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource InactiveBackground}"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
+                            <ScrollViewer Margin="0" Focusable="false" Background="Transparent">
+                                <StackPanel Margin="2" IsItemsHost="True" />
+                            </ScrollViewer>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -81,12 +79,26 @@
             <Style x:Key="Card" TargetType="Border">
                 <Setter Property="BorderBrush" Value="{StaticResource ActiveBorder}"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="3"/>
                 <Style.Triggers>
                     <Trigger Property="IsEnabled" Value="False">
                         <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="True">
                         <Setter Property="Background" Value="{StaticResource ActiveBackground}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            <Style x:Key="Deck" TargetType="Border">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="2"/>
+                <Setter Property="BorderBrush" Value="{StaticResource ActiveBorder}"/>
+                <Setter Property="Background" Value="{StaticResource NegativeSpace}"/>
+                <Setter Property="Padding" Value="3"/>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="{StaticResource InactiveBackground}"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
