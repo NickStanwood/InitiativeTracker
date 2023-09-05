@@ -5,14 +5,16 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Text">#191210</Color>
-            <Color x:Key="Background">#FAF9EF</Color>   <!-- Window  -->
-            <Color x:Key="Primary">#F6F4E0</Color>      <!-- Decks   -->
-            <Color x:Key="Secondary">#E8E4B0</Color>    <!-- Cards   -->
-            <Color x:Key="Accent">#C3423F</Color>       <!-- Buttons -->
-            <Color x:Key="Trim">#5D1E1D</Color>
+            <Color x:Key="Text">#FFFFFF</Color>
+            <Color x:Key="Background">#1C1D22</Color>   <!-- Window  -->
+            <Color x:Key="Primary">#25262D</Color>      <!-- Decks   -->
+            <Color x:Key="Secondary">#2F323A</Color>    <!-- Cards   -->
+            <Color x:Key="Accent">#087F8C</Color>       <!-- Buttons -->
+            <Color x:Key="Trim">#40434F</Color>
+            <Color x:Key="Accent-Inactive">#80087F8C</Color>
+            <Color x:Key="Accent-Highlight">#0A9DAE</Color>
 
-            <SolidColorBrush x:Key="Error">#6B0504</SolidColorBrush>
+            <SolidColorBrush x:Key="Error">#F21B3F</SolidColorBrush>
             <SolidColorBrush x:Key="Success">#28965A</SolidColorBrush>
             
             <SolidColorBrush x:Key="WindowBackground" Color="{StaticResource Background}"/>
@@ -27,10 +29,11 @@
             <SolidColorBrush x:Key="ButtonBorder" Color="{StaticResource Trim}"/>
             <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource Accent}"/>
             <SolidColorBrush x:Key="ButtonText" Color="{StaticResource Text}"/>
-            <SolidColorBrush x:Key="ButtonInactive">#AAB7B5</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonBackgroundInactive" Color="{StaticResource Accent-Inactive}"/>
+            <SolidColorBrush x:Key="ButtonBackgroundHover" Color="{StaticResource Accent-Highlight}"/>
 
             <SolidColorBrush x:Key="InputBorder" Color="{StaticResource Trim}"/>
-            <SolidColorBrush x:Key="InputBackground">#00000000</SolidColorBrush>
+            <SolidColorBrush x:Key="InputBackground"  Color="{StaticResource Background}"></SolidColorBrush>
             <SolidColorBrush x:Key="InputText" Color="{StaticResource Text}"/>
             <SolidColorBrush x:Key="InputInactive">#AAB7B5</SolidColorBrush>
 
@@ -82,15 +85,28 @@
             </Style>
             
             <Style TargetType="Button">
-                <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
                 <Setter Property="Foreground" Value="{StaticResource ButtonText}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource ButtonBorder}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Style.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="3"/>
-                    </Style>
-                </Style.Resources>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" Background="{StaticResource ButtonBackground}" BorderBrush="{StaticResource ButtonBorder}" BorderThickness="1" CornerRadius="3">
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonBackgroundInactive}"/>
+                                </Trigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsEnabled" Value="True"/>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonBackgroundHover}"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <Style TargetType="CheckBox">
@@ -108,7 +124,7 @@
                                     <Setter TargetName="checkIndicator" Property="Visibility" Value="Hidden"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="False">
-                                    <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource ButtonInactive}"/>
+                                    <Setter TargetName="checkIndicator" Property="Fill" Value="{StaticResource ButtonBackgroundInactive}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
