@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InitiativeTracker
 {
-    public class Initiative : INotifyPropertyChanged
+    public class Initiative : ViewModelBase
     {
 
         private int _rawRoll;
@@ -21,7 +21,7 @@ namespace InitiativeTracker
             {
                 _result = value;
                 _rawRoll = value - _modifier;
-                Notify("Result");
+                Notify();
             }
         }
 
@@ -41,7 +41,7 @@ namespace InitiativeTracker
                 {
                     _modifier = value;
                 }
-                Notify("Modifier");
+                Notify();
             }
         }
 
@@ -65,12 +65,6 @@ namespace InitiativeTracker
         {
             Result = _modifier + Dice.RollD20();
             return Result;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void Notify(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

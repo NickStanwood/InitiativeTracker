@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitiativeTracker
 {
-    internal class InitiativeTrackerViewModel : INotifyPropertyChanged
+    internal class InitiativeTrackerViewModel : ViewModelBase
     {
         public ObservableCollection<Character> PlayerCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
@@ -21,7 +21,7 @@ namespace InitiativeTracker
             set 
             {
                 _combatRunning = value; 
-                Notify(nameof(CombatRunning));
+                Notify();
                 Notify(nameof(CharacterWidth));
                 Notify(nameof(CombatWidth));
             }
@@ -69,12 +69,6 @@ namespace InitiativeTracker
             {
                 Combatants.Add(new Combatant(c));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void Notify(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

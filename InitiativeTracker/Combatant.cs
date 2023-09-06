@@ -7,22 +7,16 @@ using System.ComponentModel;
 
 namespace InitiativeTracker
 {
-    public  class Combatant : INotifyPropertyChanged
+    public  class Combatant : ViewModelBase
     {
         private int _health;
-        public int Health { get { return _health; } set { _health = value; Notify(nameof(Health)); } }
+        public int Health { get { return _health; } set { _health = value; Notify(); } }
 
         public Character Character { get; set; }
         public Combatant(Character character)
         {
             Character = character;
             Health = character.HP;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void Notify(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
