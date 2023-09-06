@@ -13,30 +13,25 @@ namespace InitiativeTracker
         PlayerControlled
     }
 
-    public class Character : INotifyPropertyChanged
+    public class Character : ViewModelBase
     {
         private CharacterType _type;
-        public CharacterType Type { get { return _type; } set { _type = value; Notify(nameof(Type)); } }
+        public CharacterType Type { get { return _type; } set { _type = value; Notify(); } }
 
         private bool _isEnabled = true;
-        public bool IsEnabled { get { return _isEnabled; } set { _isEnabled = value; Notify(nameof(IsEnabled)); } }
+        public bool IsEnabled { get { return _isEnabled; } set { _isEnabled = value; Notify(); } }
 
         private string _name;
-        public string Name { get { return _name; } set { _name = value; Notify(nameof(Name)); } }
+        public string Name { get { return _name; } set { _name = value; Notify(); } }
 
         private int _AC;
-        public int AC { get { return _AC; } set { _AC = value; Notify(nameof(AC)); } }
+        public int AC { get { return _AC; } set { _AC = value; Notify(); } }
 
         private int _HP;
-        public int HP { get { return _HP; } set { _HP = value; Notify(nameof(HP)); } }
+        public int HP { get { return _HP; } set { _HP = value; Notify(); } }
 
         private Initiative _initiative = new Initiative();
-        public Initiative Initiative { get { return _initiative; } set { _initiative = value; Notify(nameof(Initiative)); } }
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void Notify(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
+        public Initiative Initiative { get { return _initiative; } set { _initiative = value; Notify(); } }
 
         public Character(CharacterType type)
         {
