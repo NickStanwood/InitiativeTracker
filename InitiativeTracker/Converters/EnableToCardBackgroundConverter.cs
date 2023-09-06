@@ -18,8 +18,8 @@ namespace InitiativeTracker
             {
                 bool enabled = (bool)value;
                 if (enabled)
-                    return (SolidColorBrush)Application.Current.TryFindResource("ActiveBackground");
-                return (SolidColorBrush)Application.Current.TryFindResource("InactiveBackground");
+                    return (SolidColorBrush)Application.Current.TryFindResource("CardBackground");
+                return (SolidColorBrush)Application.Current.TryFindResource("CardInactive");
             }
             throw new InvalidOperationException();
         }

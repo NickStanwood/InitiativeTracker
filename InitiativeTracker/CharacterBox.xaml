@@ -10,6 +10,7 @@
         <local:InitiativeColourConverter x:Key="InitiativeColourConverter" />
         <local:InitiativeFontWeightConverter x:Key="InitiativeWeightConverter"/>
         <local:InitiativeMathTextConverter x:Key="InitiativeMathConverter"/>
+        <local:BoolToVisibilityConverter x:Key="EnabledToVisibilityConverter"/>
     </UserControl.Resources>
     <Border Style="{StaticResource Card}">
         <Grid>
@@ -21,46 +22,25 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" 
+            <Label Grid.Row="0" Style="{StaticResource headerText}"
                    HorizontalContentAlignment="Right" 
-                   Content="{Binding Name}" FontWeight="Bold" Foreground="{StaticResource ActiveText}"/>
+                   Content="{Binding Name}"/>
 
             <CheckBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0"
                       IsChecked="{Binding IsEnabled}"/>
 
-            <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Initiative Roll" 
-                   ToolTip="Include the Initiative Modifier in this roll.">
-                <Label.Style>
-                    <Style TargetType="Label">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Label.Style>
+            <Label Grid.Row="1"
+                   HorizontalContentAlignment="Right" Content="Initiative Roll" 
+                   ToolTip="Include the Initiative Modifier in this roll."
+                   Visibility="{Binding Path=IsEnabled, Converter={StaticResource EnabledToVisibilityConverter}}">
             </Label>
 
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3"                     
                      Text="{Binding Path=Initiative.Result, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Foreground="{Binding Path=Initiative, Converter={StaticResource InitiativeColourConverter}, UpdateSourceTrigger=PropertyChanged}"
                      FontWeight="{Binding Path=Initiative, Converter={StaticResource InitiativeWeightConverter}}"
-                     ToolTip="{Binding Path=Initiative, Converter={StaticResource InitiativeMathConverter}}">
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsEnabled}" Value="True">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
+                     ToolTip="{Binding Path=Initiative, Converter={StaticResource InitiativeMathConverter}}"
+                     Visibility="{Binding Path=IsEnabled, Converter={StaticResource EnabledToVisibilityConverter}}">
             </TextBox>
         </Grid>
     </Border>

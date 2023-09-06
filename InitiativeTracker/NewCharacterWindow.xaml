@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="New Character" Height="250" Width="300">
     <Window.Resources>
-        <local:CharacterTypeVisibilityConverter x:Key="TypeVisibilityConverter" />
+        <local:CharacterTypeVisibilityConverter x:Key="TypeVisibilityConverter" />        
     </Window.Resources>
     
-    <Grid Background="{StaticResource NegativeSpace}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -22,29 +22,27 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.Resources>
-            <Style TargetType="Label">
-                <Setter Property="FontSize" Value="16"/>
-                <Setter Property="HorizontalContentAlignment" Value="Right"/>
-                <Setter Property="Margin" Value="5"/>
-            </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="Margin" Value="5"/>
-            </Style>
-        </Grid.Resources>
         
-        <Label Grid.Row="0">Name</Label>
-        <TextBox Grid.Row="0" Grid.Column="1" x:Name="tbName" Text="{Binding Name}"/>
+        <Label Grid.Row="0" HorizontalContentAlignment="Right">Name</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="3"
+                 Text="{Binding Name}"/>
 
-        <Label Grid.Row="1" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">HP</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="tbHP" Text="{Binding HP}" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"/>
+        <Label Grid.Row="1"  HorizontalContentAlignment="Right" 
+               Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">HP</Label>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="3"
+                 Text="{Binding HP}" 
+                 Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"/>
 
-        <Label Grid.Row="2" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">AC</Label>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAC" Text="{Binding AC}" Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"/>
-        
-        <Label Grid.Row="3" ToolTip="Used to determine ties in Initiative Order.">Initiative Modifier</Label>
-        <TextBox Grid.Row="3" Grid.Column="1" x:Name="tbInitMod" Text="{Binding Initiative.Modifier}"
+        <Label Grid.Row="2" HorizontalContentAlignment="Right" 
+               Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">AC</Label>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="3"
+                 Text="{Binding AC}" 
+                 Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"/>
+
+        <Label Grid.Row="3" HorizontalContentAlignment="Right"
+               ToolTip="Used to determine ties in Initiative Order.">Initiative Modifier</Label>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="3"
+                 Text="{Binding Initiative.Modifier}"
                  ToolTip="Used to determine ties in Initiative Order."/>
 
         <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="20,20,20,0"
