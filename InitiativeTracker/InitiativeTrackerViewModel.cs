@@ -14,6 +14,9 @@ namespace InitiativeTracker
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
 
+        private Combatant _activeCombatant;
+        public Combatant ActiveCombatant { get { return _activeCombatant; } set { _activeCombatant = value; Notify(); } }
+
         private bool _combatRunning = false;
         public bool CombatRunning
         {
@@ -35,7 +38,6 @@ namespace InitiativeTracker
 
         public void CreateCombatList()
         {
-            CombatRunning = true;
             List<Character> characters = new List<Character>();
             foreach(Character c in DMCharacters)
             {
@@ -47,6 +49,9 @@ namespace InitiativeTracker
                 if (c.IsEnabled)
                     characters.Add(c);
             }
+
+            if (characters.Count == 0)
+                return;
 
             characters.Sort((a,b) =>
             {
@@ -69,6 +74,20 @@ namespace InitiativeTracker
             {
                 Combatants.Add(new Combatant(c));
             }
+            CombatRunning = true;
+            GoToNextCombatant();
+        }
+
+        public void GoToNextCombatant()
+        {
+            if (!CombatRunning)
+                return;
+
+            if(ActiveCombatant != null)
+                Combatants.Add(ActiveCombatant);
+
+            ActiveCombatant = Combatants[0];
+            Combatants.RemoveAt(0);
         }
     }
 }
