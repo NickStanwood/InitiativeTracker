@@ -77,14 +77,30 @@
                         IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}"
                         Click="BtnStartCombat_Click">Start Combat</Button>
 
-                <ListBox Grid.Row="2"
-                 ItemsSource="{Binding Combatants}" HorizontalContentAlignment="Stretch">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <local:CombatBox/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Grid.Column="0" Grid.RowSpan="3"
+                        ItemsSource="{Binding Combatants}" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <local:CombatBox/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Grid.Column="1" Grid.Row="0" Click="BtnNextTurn_Click">Next Turn</Button>
+                    <local:CombatBox Grid.Column="1" Grid.Row="1" 
+                                     Margin="3,10,3,10"
+                                     DataContext="{Binding ActiveCombatant}"/>
+                    <Button Grid.Column="1" Grid.Row="2" Click="BtnEndCombat_Click">End Combat</Button>
+                </Grid>
             </Grid>
         </Border>
 

@@ -14,6 +14,9 @@ namespace InitiativeTracker
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
 
+        private Combatant? _activeCombatant;
+        public Combatant? ActiveCombatant { get { return _activeCombatant; } set { _activeCombatant = value; Notify(); } }
+
         private bool _combatRunning = false;
         public bool CombatRunning
         {
@@ -35,7 +38,6 @@ namespace InitiativeTracker
 
         public void CreateCombatList()
         {
-            CombatRunning = true;
             List<Character> characters = new List<Character>();
             foreach(Character c in DMCharacters)
             {
@@ -48,10 +50,21 @@ namespace InitiativeTracker
                     characters.Add(c);
             }
 
+            if (characters.Count == 0)
+                return;
+
             characters.Sort((a,b) =>
             {
+                //a rolled a nat 20
+                if (a.Initiative.IsCriticalSuccess && !b.Initiative.IsCriticalSuccess)
+                    return -1;
+
+                //b rolled a nat 20
+                if (b.Initiative.IsCriticalSuccess && !a.Initiative.IsCriticalSuccess)
+                    return 1;
+
                 //a had bettter initiative
-                if(a.Initiative.Result > b.Initiative.Result)
+                if (a.Initiative.Result > b.Initiative.Result)
                     return -1;
 
                 //a and b had the same initiative, but a has a higher modifier
@@ -61,6 +74,7 @@ namespace InitiativeTracker
                     return -1;
                 }
 
+                //b had a higher initiative
                 return 1;
             });
 
@@ -69,6 +83,27 @@ namespace InitiativeTracker
             {
                 Combatants.Add(new Combatant(c));
             }
+            CombatRunning = true;
+            GoToNextCombatant();
+        }
+
+        public void GoToNextCombatant()
+        {
+            if (!CombatRunning)
+                return;
+
+            if(ActiveCombatant != null)
+                Combatants.Add(ActiveCombatant);
+
+            ActiveCombatant = Combatants[0];
+            Combatants.RemoveAt(0);
+        }
+
+        public void EndCombat()
+        {
+            Combatants.Clear();
+            ActiveCombatant = null;
+            CombatRunning = false;
         }
     }
 }
