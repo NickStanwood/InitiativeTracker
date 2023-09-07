@@ -78,9 +78,15 @@ namespace InitiativeTracker
         {
             Model.CreateCombatList();
         }
+
         private void BtnNextTurn_Click(object sender, RoutedEventArgs e)
         {
             Model.GoToNextCombatant();
+        }
+
+        private void BtnEndCombat_Click(object sender, RoutedEventArgs e)
+        {
+            Model.EndCombat();
         }
     }
 }

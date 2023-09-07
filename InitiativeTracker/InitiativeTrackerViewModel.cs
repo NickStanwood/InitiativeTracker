@@ -55,8 +55,16 @@ namespace InitiativeTracker
 
             characters.Sort((a,b) =>
             {
+                //a rolled a nat 20
+                if (a.Initiative.IsCriticalSuccess && !b.Initiative.IsCriticalSuccess)
+                    return -1;
+
+                //b rolled a nat 20
+                if (b.Initiative.IsCriticalSuccess && !a.Initiative.IsCriticalSuccess)
+                    return 1;
+
                 //a had bettter initiative
-                if(a.Initiative.Result > b.Initiative.Result)
+                if (a.Initiative.Result > b.Initiative.Result)
                     return -1;
 
                 //a and b had the same initiative, but a has a higher modifier
@@ -66,6 +74,7 @@ namespace InitiativeTracker
                     return -1;
                 }
 
+                //b had a higher initiative
                 return 1;
             });
 
@@ -88,6 +97,13 @@ namespace InitiativeTracker
 
             ActiveCombatant = Combatants[0];
             Combatants.RemoveAt(0);
+        }
+
+        public void EndCombat()
+        {
+            Combatants.Clear();
+            ActiveCombatant = null;
+            CombatRunning = false;
         }
     }
 }

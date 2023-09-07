@@ -99,7 +99,7 @@
                     <local:CombatBox Grid.Column="1" Grid.Row="1" 
                                      Margin="3,10,3,10"
                                      DataContext="{Binding ActiveCombatant}"/>
-                    <Button Grid.Column="1" Grid.Row="2">End Combat</Button>
+                    <Button Grid.Column="1" Grid.Row="2" Click="BtnEndCombat_Click">End Combat</Button>
                 </Grid>
             </Grid>
         </Border>
