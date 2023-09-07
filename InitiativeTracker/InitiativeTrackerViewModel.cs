@@ -14,8 +14,8 @@ namespace InitiativeTracker
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
 
-        private Combatant _activeCombatant;
-        public Combatant ActiveCombatant { get { return _activeCombatant; } set { _activeCombatant = value; Notify(); } }
+        private Combatant? _activeCombatant;
+        public Combatant? ActiveCombatant { get { return _activeCombatant; } set { _activeCombatant = value; Notify(); } }
 
         private bool _combatRunning = false;
         public bool CombatRunning
