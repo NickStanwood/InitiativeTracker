@@ -62,6 +62,7 @@ namespace InitiativeTracker
                 {
                     //new character dialog was saved
                     original.CopyFrom(modified);
+                
                 }
             }
         }

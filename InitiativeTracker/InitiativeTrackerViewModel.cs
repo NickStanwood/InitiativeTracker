@@ -92,6 +92,7 @@ namespace InitiativeTracker
             if (!CombatRunning)
                 return;
 
+            //put previously active combatant at bottom of initiative order
             if(ActiveCombatant != null)
                 Combatants.Add(ActiveCombatant);
 

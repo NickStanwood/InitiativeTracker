@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitiativeTracker"
         mc:Ignorable="d"
-        Title="New Character" Height="250" Width="300">
+        Title="New Character" Height="300" Width="300">
     <Window.Resources>
         <local:CharacterTypeVisibilityConverter x:Key="TypeVisibilityConverter" />        
     </Window.Resources>
@@ -21,6 +21,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
         <Label Grid.Row="0" HorizontalContentAlignment="Right">Name</Label>
@@ -45,7 +46,27 @@
                  Text="{Binding Initiative.Modifier}"
                  ToolTip="Used to determine ties in Initiative Order."/>
 
-        <Button Grid.Row="4" Grid.ColumnSpan="2" Margin="20,20,20,0"
+        <Label Grid.Row="4" HorizontalContentAlignment="Right"
+               Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">Attacks</Label>
+        <DataGrid x:Name="dgAttacks"
+                  Grid.Row="4" Grid.Column="1" 
+                  CanUserAddRows="True" AutoGenerateColumns="False"  GridLinesVisibility="Horizontal" SelectionMode="Single" 
+                  Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"
+                  ItemsSource="{Binding Attacks}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Damage" Width="*" Binding="{Binding Damage}"/>
+                <DataGridTemplateColumn Header="Delete" Width="auto" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Margin="0" Height="6" Width="14" Click="BtnDeleteAttack_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Margin="10"
                 VerticalAlignment="Top"
                 Click="BtnSave_Click">Save</Button>
     </Grid>

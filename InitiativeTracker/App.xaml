@@ -11,9 +11,9 @@
             <Color x:Key="Secondary">#2F323A</Color>    <!-- Cards   -->
             <Color x:Key="Accent">#087F8C</Color>       <!-- Buttons -->
             <Color x:Key="Trim">#40434F</Color>         <!-- Borders -->
-            <Color x:Key="Text-Inactive">#80FFFFFF</Color>
+            <Color x:Key="Text-Inactive">#40FFFFFF</Color>
             <Color x:Key="Trim-Inactive">#8040434F</Color>
-            <Color x:Key="Accent-Inactive">#80087F8C</Color>
+            <Color x:Key="Accent-Inactive">#40087F8C</Color>
             <Color x:Key="Accent-Highlight">#0A9DAE</Color>
 
             <SolidColorBrush x:Key="Error">#F21B3F</SolidColorBrush>
@@ -36,7 +36,9 @@
             <SolidColorBrush x:Key="ButtonBackgroundHover" Color="{StaticResource Accent-Highlight}"/>
 
             <SolidColorBrush x:Key="InputBorder" Color="{StaticResource Trim}"/>
+            <SolidColorBrush x:Key="InputBorderFocused" Color="{StaticResource Accent}"/>
             <SolidColorBrush x:Key="InputBackground"  Color="{StaticResource Background}"></SolidColorBrush>
+            <SolidColorBrush x:Key="InputHighlight" Color="{StaticResource Accent-Highlight}"/>
             <SolidColorBrush x:Key="InputText" Color="{StaticResource Text}"/>
             <SolidColorBrush x:Key="InputInactive">#AAB7B5</SolidColorBrush>
 
@@ -60,14 +62,14 @@
                 <Setter Property="FontSize" Value="12"/>
             </Style>
             
-            <Style x:Key="headerText" TargetType="Label">
+            <Style x:Key="headerLabel" TargetType="Label">
                 <Setter Property="Background" Value="{StaticResource BodyBackground}"/>
                 <Setter Property="Foreground" Value="{StaticResource BodyText}"/>
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="FontWeight" Value="Bold"/>
             </Style>
 
-            <Style x:Key="titleText" TargetType="Label">
+            <Style x:Key="titleLabel" TargetType="Label">
                 <Setter Property="Background" Value="{StaticResource TitleBackground}"/>
                 <Setter Property="Foreground" Value="{StaticResource TitleText}"/>
                 <Setter Property="FontSize" Value="14"/>
@@ -147,7 +149,58 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
+            <Style TargetType="DataGrid">
+                <Setter Property="VerticalGridLinesBrush" Value="{StaticResource InputBorder}"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource InputBorder}"/>
+                <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
+                <Setter Property="AutoGenerateColumns" Value="False"/>
+                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="ColumnHeaderStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="{StaticResource DeckBackground}"/>
+                            <Setter Property="Foreground" Value="{StaticResource BodyText}"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Margin" Value="3,0,3,0"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="RowStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+                            <Setter Property="Foreground" Value="{StaticResource InputText}"/>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="CellStyle">
+                    <Setter.Value>
+                        <Style TargetType="DataGridCell">
+                            <Style.Triggers>
+                                <Trigger Property="IsEditing" Value="True">
+                                    <Setter Property="BorderBrush" Value="{StaticResource InputBorderFocused}"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridCell">
+                                                <TextBox x:Name="cellTextBox"
+                                                         Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.Text, Mode=TwoWay, UpdateSourceTrigger=Default}"
+                                                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" BorderThickness="1"
+                                                         BorderBrush="{StaticResource InputBorderFocused}"/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Setter.Value>
+                </Setter>
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource Secondary}"/>
+                </Style.Resources>
+            </Style>
+
             <Style x:Key="Card" TargetType="Border">
                 <Setter Property="BorderBrush" Value="{StaticResource CardBorder}"/>
                 <Setter Property="BorderThickness" Value="1"/>

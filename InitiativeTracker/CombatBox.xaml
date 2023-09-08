@@ -21,23 +21,26 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
             
-            <Label Grid.Row="0" Style="{StaticResource headerText}"
+            <Label Grid.Row="0" Style="{StaticResource headerLabel}"
                    HorizontalContentAlignment="Right" 
                    Content="{Binding Character.Name}"/>
 
             <CheckBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0"
                       IsChecked="{Binding Path=Character.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Row="1" HorizontalContentAlignment="Right" Content="Health"/>
+            <Label Grid.Row="1" HorizontalContentAlignment="Right" 
+                   Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                   Content="Health"/>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="3"
+                     Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                      Text="{Binding Health}" />
 
             <Label Grid.Row="2" HorizontalContentAlignment="Right"
                    Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                     Content="AC"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="3"
+            <Label Grid.Row="2" Grid.Column="1"
                      Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
-                     Text="{Binding Character.AC}" />
+                     Content="{Binding Character.AC}" />
         </Grid>
     </Border>
 </UserControl>
