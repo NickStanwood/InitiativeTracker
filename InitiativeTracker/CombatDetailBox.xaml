@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="InitiativeTracker.CombatDetailBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InitiativeTracker"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="200">
+    <UserControl.Resources>
+        <local:CharacterTypeVisibilityConverter x:Key="VisibilityConverter"/>
+    </UserControl.Resources>
+    <Border Style="{StaticResource Card}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <!-- Name -->
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource titleLabel}"
+                   HorizontalContentAlignment="Center" 
+                   Content="{Binding Character.Name}"/>
+
+            <!-- Health -->
+            <Label Grid.Row="1" HorizontalContentAlignment="Right" 
+                   Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                   Content="Health"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="3"
+                     Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                     Text="{Binding Health}" />
+
+            <!-- AC -->
+            <Label Grid.Row="2" HorizontalContentAlignment="Right"
+                   Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                    Content="AC"/>
+            <Label Grid.Row="2" Grid.Column="1" Margin="3"
+                     Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                     Content="{Binding Character.AC}" />
+
+            <!-- Attacks -->
+            <Label Grid.Row="3" Grid.ColumnSpan="2" HorizontalContentAlignment="Center"
+                   Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
+                   Content="Attacks"/>
+            <DataGrid Grid.Row="4" Grid.ColumnSpan="2"
+                      x:Name="dgAttacks"
+                      ItemsSource="{Binding Character.Attacks}"
+                      IsReadOnly="True"
+                      Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Damage" Width="*" Binding="{Binding Damage}"/>
+                    <DataGridTemplateColumn Header="Roll" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Margin="0" Height="14" Width="14" Click="BtnRollAttack_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBox x:Name="tbDamage"
+                     Grid.Row="5" Grid.ColumnSpan="2" Margin="3"
+                     IsReadOnly="True"
+                     Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"/>
+
+        </Grid>
+    </Border>
+</UserControl>

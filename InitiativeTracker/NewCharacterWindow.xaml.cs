@@ -56,5 +56,15 @@ namespace InitiativeTracker
             DialogResult = true;
             Close();
         }
+
+        private void BtnDeleteAttack_Click(object sender, RoutedEventArgs e)
+        {            
+            if (dgAttacks.Items.Count > 1 && Character.Attacks.Count > 1)
+            {
+                Attack? atk = dgAttacks.SelectedItem as Attack;
+                if(atk != null)
+                    Character.Attacks.Remove(atk);
+            }
+        }
     }
 }

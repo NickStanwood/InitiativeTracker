@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace InitiativeTracker
 {
@@ -12,6 +13,17 @@ namespace InitiativeTracker
         DMControlled,
         PlayerControlled
     }
+
+    //public struct CharacterModel
+    //{
+    //    public CharacterType Type { get; set; }
+    //    public bool IsEnabled { get; set; }
+    //    public string Name { get; set; }
+    //    public int AC { get; set; }
+    //    public int HP { get; set; }
+    //    public InitiativeModel Initiative { get; set; }
+    //    public List<AttackModel> Attacks { get; set; }
+    //}
 
     public class Character : ViewModelBase
     {
@@ -33,6 +45,7 @@ namespace InitiativeTracker
         private Initiative _initiative = new Initiative();
         public Initiative Initiative { get { return _initiative; } set { _initiative = value; Notify(); } }
 
+        public ObservableCollection<Attack> Attacks { get; set; } = new ObservableCollection<Attack>();
         public Character(CharacterType type)
         {
             Type = type;
@@ -45,8 +58,8 @@ namespace InitiativeTracker
             c.Name = Name;
             c.AC = AC;
             c.HP = HP;
-            c.Initiative = Initiative;
-
+            c.Initiative = Initiative.Clone();
+            c.Attacks = Attacks.Clone();
             return c;
         }
 
@@ -55,7 +68,8 @@ namespace InitiativeTracker
             Name = source.Name;
             AC = source.AC;
             HP = source.HP;
-            Initiative = source.Initiative;
+            Initiative = source.Initiative.Clone();
+            Attacks = source.Attacks.Clone();
         }
     }
 }

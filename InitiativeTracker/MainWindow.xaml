@@ -45,7 +45,7 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Style="{StaticResource titleText}"
+                <Label Grid.Row="0" Style="{StaticResource titleLabel}"
                Content="Player Characters"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 <Button Grid.Row="1" Margin="0,3,0,3" Click="BtnAddCharacter_Click">Add Character</Button>
@@ -69,7 +69,7 @@
                     <RowDefinition Height="{Binding CombatRunning, Converter={StaticResource EnableToZeroHeight}}"/>
                     <RowDefinition Height="{Binding CombatRunning, Converter={StaticResource EnableToMaxHeight}}"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Style="{StaticResource titleText}"
+                <Label Grid.Row="0" Style="{StaticResource titleLabel}"
                Content="Combat Tracker" FontWeight="Bold"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 <Button Grid.Row="1"
@@ -96,7 +96,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                     <Button Grid.Column="1" Grid.Row="0" Click="BtnNextTurn_Click">Next Turn</Button>
-                    <local:CombatBox Grid.Column="1" Grid.Row="1" 
+                    <local:CombatDetailBox Grid.Column="1" Grid.Row="1" 
                                      Margin="3,10,3,10"
                                      DataContext="{Binding ActiveCombatant}"/>
                     <Button Grid.Column="1" Grid.Row="2" Click="BtnEndCombat_Click">End Combat</Button>
@@ -114,7 +114,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Style="{StaticResource titleText}"
+                <Label Grid.Row="0" Style="{StaticResource titleLabel}"
                Content="DM Characters"
                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
 
