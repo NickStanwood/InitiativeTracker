@@ -24,9 +24,22 @@ namespace InitiativeTracker
         {
             InitializeComponent();
         }
+
         private void BtnRollAttack_Click(object sender, RoutedEventArgs e)
         {
+            Attack? attack = dgAttacks.SelectedItem as Attack;
+            if (attack == null)
+                return;
 
+            int damage = 0;
+            if(Dice.TryRoll(attack.Damage, ref damage))
+            {
+                tbDamage.Text = $"{attack.Name}: {damage} Damage";
+            }
+            else
+            {
+                tbDamage.Text = $"{attack.Name}: Invalid";
+            }
         }
     }
 }
