@@ -66,5 +66,13 @@ namespace InitiativeTracker
             Result = _modifier + Dice.RollD20();
             return Result;
         }
+
+        public Initiative Clone()
+        {
+            Initiative clone = new Initiative();
+            clone.Modifier = Modifier;
+            clone.Result = Result;
+            return clone;
+        }
     }
 }

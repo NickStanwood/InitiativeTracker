@@ -50,7 +50,7 @@
                Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}">Attacks</Label>
         <DataGrid x:Name="dgAttacks"
                   Grid.Row="4" Grid.Column="1" 
-                  CanUserAddRows="True" AutoGenerateColumns="False"  GridLinesVisibility="Horizontal" SelectionMode="Single" 
+                  CanUserAddRows="True"
                   Visibility="{Binding Path=Type, Converter={StaticResource TypeVisibilityConverter}}"
                   ItemsSource="{Binding Attacks}">
             <DataGrid.Columns>

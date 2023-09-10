@@ -58,8 +58,8 @@ namespace InitiativeTracker
             c.Name = Name;
             c.AC = AC;
             c.HP = HP;
-            c.Initiative = Initiative;
-
+            c.Initiative = Initiative.Clone();
+            c.Attacks = Attacks.Clone();
             return c;
         }
 
@@ -68,8 +68,8 @@ namespace InitiativeTracker
             Name = source.Name;
             AC = source.AC;
             HP = source.HP;
-            Initiative = source.Initiative;
-            Attacks = source.Attacks;
+            Initiative = source.Initiative.Clone();
+            Attacks = source.Attacks.Clone();
         }
     }
 }
