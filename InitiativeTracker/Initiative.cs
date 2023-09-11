@@ -9,37 +9,35 @@ namespace InitiativeTracker
 {
     public class Initiative : ViewModelBase
     {
+        private InitiativeModel _m;
 
         private int _rawRoll;
         public int RawRoll { get { return _rawRoll; } }
 
-        private int _result;
         public int Result
         {
-            get { return _result; }
+            get { return _m.Result; }
             set
             {
-                _result = value;
-                _rawRoll = value - _modifier;
+                _m.Result = value;
+                _rawRoll = value - _m.Modifier;
                 Notify();
             }
         }
-
-        private int _modifier;
         public int Modifier
         {
-            get { return _modifier; }
+            get { return _m.Modifier; }
             set
             {
                 if(Result != 0)
                 {
-                    int delta = value - _modifier;
-                    _modifier = value;
+                    int delta = value - _m.Modifier;
+                    _m.Modifier = value;
                     Result = Result + delta;
                 }
                 else
                 {
-                    _modifier = value;
+                    _m.Modifier = value;
                 }
                 Notify();
             }
@@ -50,20 +48,22 @@ namespace InitiativeTracker
 
         public Initiative()
         {
-            _result = 0;
-            _modifier = 0;
+            _m = new InitiativeModel
+            {
+                Result = 0,
+                Modifier = 0,
+            };
             _rawRoll = 0;
         }
-
-        public int Roll(int modifier)
+        public Initiative(InitiativeModel model)
         {
-            _modifier = modifier;
-            return Roll();
+            _m = model;
+            _rawRoll = 0;
         }
 
         public int Roll()
         {
-            Result = _modifier + Dice.RollD20();
+            Result = _m.Modifier + Dice.RollD20();
             return Result;
         }
 

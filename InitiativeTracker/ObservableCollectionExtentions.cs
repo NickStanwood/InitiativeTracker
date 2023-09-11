@@ -9,12 +9,12 @@ namespace InitiativeTracker
 {
     internal static class ObservableCollectionExtentions
     {
-        public static ObservableCollection<Attack> Clone(this ObservableCollection<Attack> collection )
+        public static ObservableCollection<AttackModel> Clone(this ObservableCollection<AttackModel> collection )
         {
-            ObservableCollection<Attack> clone = new ObservableCollection<Attack>();
-            foreach( Attack attack in collection )
+            ObservableCollection<AttackModel> clone = new ObservableCollection<AttackModel>();
+            foreach( AttackModel attack in collection )
             {
-                clone.Add( new Attack { Name=attack.Name, Damage=attack.Damage});
+                clone.Add( new AttackModel { Name=attack.Name, Damage=attack.Damage});
             }
             return clone;
         }

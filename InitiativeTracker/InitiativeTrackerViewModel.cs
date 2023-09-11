@@ -31,7 +31,7 @@ namespace InitiativeTracker
         }
 
         public string CharacterWidth { get { return CombatRunning ? "*" : "2*"; } }
-        public string CombatWidth { get { return CombatRunning ? "2*" : "*"; } }
+        public string CombatWidth { get { return CombatRunning ? "3*" : "*"; } }
         public InitiativeTrackerViewModel()
         {
         }
