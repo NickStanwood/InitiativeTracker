@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InitiativeTracker
 {
-    internal class InitiativeTrackerViewModel : ViewModelBase<EncounterModel>
+    internal class Encounter : ViewModelBase<EncounterModel>
     {
         public ObservableCollection<Character> PlayerCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
@@ -30,7 +30,7 @@ namespace InitiativeTracker
 
         public string CharacterWidth { get { return CombatRunning ? "*" : "2*"; } }
         public string CombatWidth { get { return CombatRunning ? "3*" : "*"; } }
-        public InitiativeTrackerViewModel() 
+        public Encounter() 
             : base(new EncounterModel())
         {}
 

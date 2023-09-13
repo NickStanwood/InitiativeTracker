@@ -20,11 +20,11 @@ namespace InitiativeTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        InitiativeTrackerViewModel Model;
+        Encounter Model;
         public MainWindow()
         {
             InitializeComponent();
-            Model = new InitiativeTrackerViewModel();
+            Model = new Encounter();
             this.DataContext = Model;
         }
 
