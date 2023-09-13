@@ -10,5 +10,13 @@ namespace InitiativeTracker
     {
         public string Name { get; set; }
         public string Damage { get; set; }
+        public AttackModel Clone()
+        {
+            return new AttackModel
+            {
+                Name = Name,
+                Damage = Damage,
+            };
+        }
     }
 }

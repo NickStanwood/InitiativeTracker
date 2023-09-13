@@ -10,5 +10,14 @@ namespace InitiativeTracker
     {
         public int Modifier { get; set; }
         public int Result { get; set; }
+
+        public InitiativeModel Clone()
+        {
+            return new InitiativeModel
+            {
+                Modifier = Modifier,
+                Result = Result,
+            };
+        }
     }
 }
