@@ -14,7 +14,7 @@
         <local:BoolToZeroHeightConverter x:Key="EnableToZeroHeight"/>
     </Window.Resources>
     <Window.DataContext>
-        <Binding Source="local:InitiativeTrackerViewModel"/>
+        <Binding Source="local:Encounter"/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>

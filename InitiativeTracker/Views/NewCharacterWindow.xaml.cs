@@ -59,7 +59,7 @@ namespace InitiativeTracker
 
         private void BtnDeleteAttack_Click(object sender, RoutedEventArgs e)
         {            
-            if (dgAttacks.Items.Count > 1 && Character.Attacks.Count > 1)
+            if (dgAttacks.Items.Count > 1 && Character.Attacks.Count > 0)
             {
                 Attack? atk = dgAttacks.SelectedItem as Attack;
                 if(atk != null)

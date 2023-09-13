@@ -25,7 +25,7 @@ namespace InitiativeTracker
             InitializeComponent();
         }
 
-        public Character GetBoundCharacter()
+        public Character? GetViewModel()
         {
             return DataContext as Character;
         }

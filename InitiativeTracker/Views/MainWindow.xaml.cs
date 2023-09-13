@@ -20,11 +20,11 @@ namespace InitiativeTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-        InitiativeTrackerViewModel Model;
+        Encounter Model;
         public MainWindow()
         {
             InitializeComponent();
-            Model = new InitiativeTrackerViewModel();
+            Model = new Encounter();
             this.DataContext = Model;
         }
 
@@ -52,7 +52,7 @@ namespace InitiativeTracker
         private void CharacterBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CharacterBox cb = (CharacterBox)sender;
-            Character original = cb.GetBoundCharacter();
+            Character? original = cb.GetViewModel();
             if (original != null)
             {
                 Character modified = original.Clone();

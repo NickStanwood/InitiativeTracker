@@ -27,7 +27,7 @@ namespace InitiativeTracker
 
         private void BtnRollAttack_Click(object sender, RoutedEventArgs e)
         {
-            Attack? attack = dgAttacks.SelectedItem as Attack;
+            AttackModel? attack = dgAttacks.SelectedItem as AttackModel;
             if (attack == null)
                 return;
 
