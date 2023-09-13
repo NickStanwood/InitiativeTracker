@@ -8,14 +8,12 @@ using System.Threading.Tasks;
 
 namespace InitiativeTracker
 {
-    internal class InitiativeTrackerViewModel : ViewModelBase
+    internal class InitiativeTrackerViewModel : ViewModelBase<EncounterModel>
     {
         public ObservableCollection<Character> PlayerCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Character> DMCharacters { get; set; } = new ObservableCollection<Character>();
         public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
-
-        private Combatant? _activeCombatant;
-        public Combatant? ActiveCombatant { get { return _activeCombatant; } set { _activeCombatant = value; Notify(); } }
+        public CombatantModel? ActiveCombatant { get { return _m.ActiveCombatant; } set { _m.ActiveCombatant = value; Notify(); } }
 
         private bool _combatRunning = false;
         public bool CombatRunning
@@ -32,8 +30,15 @@ namespace InitiativeTracker
 
         public string CharacterWidth { get { return CombatRunning ? "*" : "2*"; } }
         public string CombatWidth { get { return CombatRunning ? "3*" : "*"; } }
-        public InitiativeTrackerViewModel()
+        public InitiativeTrackerViewModel() 
+            : base(new EncounterModel())
+        {}
+
+        protected override void Initialize()
         {
+            TieModelListToViewModelList(_m.PlayerCharacters, PlayerCharacters);
+            TieModelListToViewModelList(_m.DMCharacters, DMCharacters);
+            TieModelListToViewModelList(_m.Combatants, Combatants);
         }
 
         public void CreateCombatList()
@@ -69,7 +74,7 @@ namespace InitiativeTracker
 
                 //a and b had the same initiative, but a has a higher modifier
                 if(a.Initiative.Result == b.Initiative.Result &&
-                a.Initiative.Modifier > b.Initiative.Modifier)
+                   a.Initiative.Modifier > b.Initiative.Modifier)
                 {
                     return -1;
                 }
@@ -81,7 +86,7 @@ namespace InitiativeTracker
             Combatants.Clear();
             foreach (Character c in characters)
             {
-                Combatants.Add(new Combatant(c));
+                Combatants.Add(new Combatant(c.GetModel()));
             }
             CombatRunning = true;
             GoToNextCombatant();
@@ -94,9 +99,9 @@ namespace InitiativeTracker
 
             //put previously active combatant at bottom of initiative order
             if(ActiveCombatant != null)
-                Combatants.Add(ActiveCombatant);
+                Combatants.Add(new Combatant(ActiveCombatant));
 
-            ActiveCombatant = Combatants[0];
+            ActiveCombatant = Combatants[0].GetModel();
             Combatants.RemoveAt(0);
         }
 

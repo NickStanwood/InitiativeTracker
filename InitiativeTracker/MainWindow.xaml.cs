@@ -52,7 +52,7 @@ namespace InitiativeTracker
         private void CharacterBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
             CharacterBox cb = (CharacterBox)sender;
-            Character original = cb.GetBoundCharacter();
+            Character? original = cb.GetViewModel();
             if (original != null)
             {
                 Character modified = original.Clone();

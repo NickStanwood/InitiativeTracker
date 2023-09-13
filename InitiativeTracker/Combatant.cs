@@ -7,15 +7,24 @@ using System.ComponentModel;
 
 namespace InitiativeTracker
 {
-    public  class Combatant : ViewModelBase
+    public class Combatant : ViewModelBase<CombatantModel>
     {
-        private int _health;
-        public int Health { get { return _health; } set { _health = value; Notify(); } }
+        public int Health { get { return _m.Health; } set { _m.Health = value; Notify(); } }
         public Character Character { get; set; }
-        public Combatant(Character character)
+
+        public Combatant() : base()
+        { }
+
+        public Combatant(CombatantModel combatant) : base(combatant)
+        { }
+
+        public Combatant(CharacterModel character) 
+            : base(new CombatantModel { Health = character.HP, Character = character})
+        { }
+
+        protected override void Initialize()
         {
-            Character = character;
-            Health = character.HP;
+            Character = new Character(_m.Character);
         }
     }
 }

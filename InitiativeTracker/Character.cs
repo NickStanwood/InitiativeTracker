@@ -8,10 +8,8 @@ using System.Collections.ObjectModel;
 
 namespace InitiativeTracker
 {
-
-    public class Character : ViewModelBase
+    public class Character : ViewModelBase<CharacterModel>
     {
-        private CharacterModel _m = new CharacterModel();
         public CharacterType Type { get { return _m.Type; } set { _m.Type = value; Notify(); } }
         public bool IsEnabled { get { return _m.IsEnabled; } set { _m.IsEnabled = value; Notify(); } }
         public string Name { get { return _m.Name; } set { _m.Name = value; Notify(); } }
@@ -21,33 +19,32 @@ namespace InitiativeTracker
         private Initiative _initiative;
         public Initiative Initiative { get { return _initiative; } set { _initiative = value; Notify(); } }
 
-        public ObservableCollection<AttackModel> Attacks { get; set; }
-        public Character(CharacterType type)
+        public ObservableCollection<Attack> Attacks { get; set; } = new ObservableCollection<Attack>();
+
+        public Character() : base()
+        { }
+
+        public Character(CharacterType type) : base(new CharacterModel { Type = type})
+        {}
+
+        public Character(CharacterModel character) : base(character)
+        {}
+
+        protected override void Initialize()
         {
-            Type = type;
             _initiative = new Initiative(_m.Initiative);
-            Attacks = new ObservableCollection<AttackModel>(_m.Attacks);
             _initiative.PropertyChanged += (sender, e) => Notify(nameof(Initiative));
+
+            TieModelListToViewModelList(_m.Attacks, Attacks);
         }
 
         public Character Clone()
         {
-            Character c = new Character(Type);
-            c.Name = Name;
-            c.AC = AC;
-            c.HP = HP;
-            c.Initiative = Initiative.Clone();
-            c.Attacks = Attacks.Clone();
-            return c;
+            return new Character(_m.Clone());
         }
-
         public void CopyFrom(Character source)
         {
-            Name = source.Name;
-            AC = source.AC;
-            HP = source.HP;
-            Initiative = source.Initiative.Clone();
-            Attacks = source.Attacks.Clone();
+            _m.CopyFrom(source.GetModel());
         }
     }
 }

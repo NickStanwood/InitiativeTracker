@@ -61,7 +61,7 @@ namespace InitiativeTracker
         {            
             if (dgAttacks.Items.Count > 1 && Character.Attacks.Count > 0)
             {
-                AttackModel? atk = dgAttacks.SelectedItem as AttackModel;
+                Attack? atk = dgAttacks.SelectedItem as Attack;
                 if(atk != null)
                     Character.Attacks.Remove(atk);
             }
