@@ -29,7 +29,7 @@
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="File">
                 <MenuItem Header="Open Encounter"/>
-                <MenuItem Header="Save Encounter"/>
+                <MenuItem Header="Save Encounter" Click="MenuItemSave_Click"/>
                 <MenuItem Header="Save Encounter As"/>
             </MenuItem>
             <MenuItem Header="Help">

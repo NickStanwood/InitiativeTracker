@@ -15,12 +15,24 @@ namespace InitiativeTracker
 
     public class CharacterModel: IEquatable<CharacterModel>
     {
-        public Guid Id { get; } = new Guid();
+        [XmlAttribute]
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        [XmlAttribute]
         public CharacterType Type { get; set; }
+
+        [XmlAttribute]
         public bool IsEnabled { get; set; } = true;
+
+        [XmlAttribute]
         public string Name { get; set; }
+
+        [XmlAttribute]
         public int AC { get; set; }
+
+        [XmlAttribute]
         public int HP { get; set; }
+
         public InitiativeModel Initiative { get; set; } = new InitiativeModel();
         public List<AttackModel> Attacks { get; set; } = new List<AttackModel>();
 

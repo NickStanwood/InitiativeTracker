@@ -84,9 +84,10 @@ namespace InitiativeTracker
             });
 
             Combatants.Clear();
+            int i = 1;
             foreach (Character c in characters)
             {
-                Combatants.Add(new Combatant(c.GetModel()));
+                Combatants.Add(new Combatant(c.GetModel(), i++));
             }
             CombatRunning = true;
             GoToNextCombatant();

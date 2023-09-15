@@ -89,5 +89,10 @@ namespace InitiativeTracker
         {
             Model.EndCombat();
         }
+
+        private void MenuItemSave_Click(object sender, RoutedEventArgs e)
+        {
+            XmlSerializer.Serialize("C:/temp/test.xml", Model.GetModel());
+        }
     }
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace InitiativeTracker
 {
+    [XmlRootAttribute("Encounter", Namespace = "http://www.cpandl.com", IsNullable = false)]
     public class EncounterModel
     {
         public CombatantModel? ActiveCombatant { get; set; }
