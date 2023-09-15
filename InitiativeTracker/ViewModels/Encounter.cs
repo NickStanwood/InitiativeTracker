@@ -27,9 +27,11 @@ namespace InitiativeTracker
                 Notify(nameof(CombatWidth));
             }
         }
-
         public string CharacterWidth { get { return CombatRunning ? "*" : "2*"; } }
         public string CombatWidth { get { return CombatRunning ? "3*" : "*"; } }
+
+        private string _filePath = "";
+        public string FilePath { get { return _filePath; } set { _filePath = value; Notify(); } }
         public Encounter() 
             : base(new EncounterModel())
         {}

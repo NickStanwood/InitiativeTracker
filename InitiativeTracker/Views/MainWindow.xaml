@@ -30,7 +30,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="Open Encounter"/>
                 <MenuItem Header="Save Encounter" Click="MenuItemSave_Click"/>
-                <MenuItem Header="Save Encounter As"/>
+                <MenuItem Header="Save Encounter As" Click="MenuItemSaveAs_Click"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="I Believe In You"/>

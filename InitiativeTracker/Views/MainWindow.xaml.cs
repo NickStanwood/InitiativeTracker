@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,7 +93,26 @@ namespace InitiativeTracker
 
         private void MenuItemSave_Click(object sender, RoutedEventArgs e)
         {
-            XmlSerializer.Serialize("C:/temp/test.xml", Model.GetModel());
+            if(Model.FilePath.EndsWith(".xml"))
+            {
+                XmlSerializer.Serialize(Model.FilePath, Model.GetModel());
+            }
+            else
+            {
+                MenuItemSaveAs_Click(sender, e);
+            }
+        }
+
+        private void MenuItemSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "XML file (*.xml)|*.xml";
+
+            if(sfd.ShowDialog() == true)
+            {
+                Model.FilePath = sfd.FileName;
+                XmlSerializer.Serialize(Model.FilePath, Model.GetModel());
+            }
         }
     }
 }

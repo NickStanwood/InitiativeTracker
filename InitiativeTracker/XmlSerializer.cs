@@ -14,7 +14,7 @@ namespace InitiativeTracker
         public static void Serialize(string filePath, EncounterModel model)
         {
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(EncounterModel));
-            using(XmlWriter xw = XmlWriter.Create("C:/temp/test.xml", new XmlWriterSettings { Indent = true}))
+            using(XmlWriter xw = XmlWriter.Create(filePath, new XmlWriterSettings { Indent = true}))
             {
                 serializer.Serialize(xw, model);
             }
@@ -23,7 +23,7 @@ namespace InitiativeTracker
         public static EncounterModel? Deserialize(string filePath)
         {
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(EncounterModel));
-            using (FileStream fs = new FileStream("C:/temp/test.xml", FileMode.Open, FileAccess.Read))
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
                 return serializer.Deserialize(fs) as EncounterModel;
             }
