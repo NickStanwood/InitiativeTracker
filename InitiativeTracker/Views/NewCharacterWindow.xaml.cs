@@ -21,6 +21,7 @@ namespace InitiativeTracker
         public NewCharacterWindow(CharacterType type)
         {
             InitializeComponent();
+            tbName.Focus();
 
             Character = new Character(type);
             if(type == CharacterType.PlayerControlled)
@@ -38,6 +39,7 @@ namespace InitiativeTracker
         public NewCharacterWindow(Character character)
         {
             InitializeComponent();
+            tbName.Focus();
 
             Character = character;
             if (character.Type == CharacterType.PlayerControlled)

@@ -188,6 +188,11 @@
                                                          Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content.Text, Mode=TwoWay, UpdateSourceTrigger=Default}"
                                                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" BorderThickness="1"
                                                          BorderBrush="{StaticResource InputBorderFocused}"/>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsFocused" Value="True">
+                                                        <Setter TargetName="cellTextBox" Property="FocusManager.FocusedElement" Value="{Binding ElementName=cellTextBox}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </Setter.Value>
                                     </Setter>

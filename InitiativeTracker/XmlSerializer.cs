@@ -22,11 +22,19 @@ namespace InitiativeTracker
 
         public static EncounterModel? Deserialize(string filePath)
         {
-            System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(EncounterModel));
-            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                return serializer.Deserialize(fs) as EncounterModel;
+                System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(EncounterModel));
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    return serializer.Deserialize(fs) as EncounterModel;
+                }
             }
+            catch
+            {
+                return null;
+            }
+            
         }
     }
 }
