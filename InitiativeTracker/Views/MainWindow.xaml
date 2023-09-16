@@ -28,9 +28,9 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="File">
-                <MenuItem Header="Open Encounter"/>
-                <MenuItem Header="Save Encounter"/>
-                <MenuItem Header="Save Encounter As"/>
+                <MenuItem Header="Open Encounter" Click="MenuItemOpen_Click"/>
+                <MenuItem Header="Save Encounter" Click="MenuItemSave_Click"/>
+                <MenuItem Header="Save Encounter As" Click="MenuItemSaveAs_Click"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="I Believe In You"/>

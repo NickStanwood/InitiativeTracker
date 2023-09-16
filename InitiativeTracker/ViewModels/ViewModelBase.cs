@@ -43,6 +43,7 @@ namespace InitiativeTracker
             where Model : new()
             where ViewModel : ViewModelBase<Model>, new()
         {
+            viewModelList.Clear();
             foreach (Model m in modelList)
             {
                 ViewModel vm = new ViewModel { _m = m};

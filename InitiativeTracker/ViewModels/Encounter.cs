@@ -15,25 +15,30 @@ namespace InitiativeTracker
         public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
         public CombatantModel? ActiveCombatant { get { return _m.ActiveCombatant; } set { _m.ActiveCombatant = value; Notify(); } }
 
-        private bool _combatRunning = false;
         public bool CombatRunning
         {
-            get { return _combatRunning; }
+            get { return _m.CombatRunning; }
             set 
             {
-                _combatRunning = value; 
+                _m.CombatRunning = value; 
                 Notify();
                 Notify(nameof(CharacterWidth));
                 Notify(nameof(CombatWidth));
             }
         }
-
         public string CharacterWidth { get { return CombatRunning ? "*" : "2*"; } }
         public string CombatWidth { get { return CombatRunning ? "3*" : "*"; } }
+
+        private string _filePath = "";
+        public string FilePath { get { return _filePath; } set { _filePath = value; Notify(); } }
         public Encounter() 
             : base(new EncounterModel())
         {}
 
+        public Encounter(EncounterModel model)
+            : base(model)
+        { }
+        
         protected override void Initialize()
         {
             TieModelListToViewModelList(_m.PlayerCharacters, PlayerCharacters);
@@ -84,9 +89,10 @@ namespace InitiativeTracker
             });
 
             Combatants.Clear();
+            int i = 1;
             foreach (Character c in characters)
             {
-                Combatants.Add(new Combatant(c.GetModel()));
+                Combatants.Add(new Combatant(c.GetModel(), i++));
             }
             CombatRunning = true;
             GoToNextCombatant();

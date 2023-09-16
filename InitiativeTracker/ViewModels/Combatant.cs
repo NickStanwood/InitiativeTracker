@@ -18,8 +18,8 @@ namespace InitiativeTracker
         public Combatant(CombatantModel combatant) : base(combatant)
         { }
 
-        public Combatant(CharacterModel character) 
-            : base(new CombatantModel { Health = character.HP, Character = character})
+        public Combatant(CharacterModel character, int order) 
+            : base(new CombatantModel { Health = character.HP, InitiativeOrder = order, Character = character})
         { }
 
         protected override void Initialize()

@@ -40,7 +40,7 @@
             <Label Grid.Row="2" HorizontalContentAlignment="Right"
                    Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                     Content="AC"/>
-            <Label Grid.Row="2" Grid.Column="1" Margin="3"
+            <Label Grid.Row="2" Grid.Column="1"
                      Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                      Content="{Binding Character.AC}" />
 

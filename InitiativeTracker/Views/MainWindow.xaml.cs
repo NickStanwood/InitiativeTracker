@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -89,5 +90,47 @@ namespace InitiativeTracker
         {
             Model.EndCombat();
         }
+
+        private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "XML file (*.xml)|*.xml";
+
+            if (ofd.ShowDialog() == true)
+            {
+                EncounterModel? model = XmlSerializer.Deserialize(ofd.FileName);
+                if (model != null)
+                {
+                    Model = new Encounter(model);
+                    this.DataContext = Model;
+                    Model.FilePath = ofd.FileName;
+                }
+            }
+        }
+
+        private void MenuItemSave_Click(object sender, RoutedEventArgs e)
+        {
+            if(Model.FilePath.EndsWith(".xml"))
+            {
+                XmlSerializer.Serialize(Model.FilePath, Model.GetModel());
+            }
+            else
+            {
+                MenuItemSaveAs_Click(sender, e);
+            }
+        }
+
+        private void MenuItemSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "XML file (*.xml)|*.xml";
+
+            if(sfd.ShowDialog() == true)
+            {
+                Model.FilePath = sfd.FileName;
+                XmlSerializer.Serialize(Model.FilePath, Model.GetModel());
+            }
+        }
+
     }
 }

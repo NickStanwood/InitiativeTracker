@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace InitiativeTracker
 {
     public class CombatantModel : IEquatable<CombatantModel>
     {
-        public Guid Id { get; } = new Guid();
+        [XmlAttribute]
+        public Guid Id { get; } = Guid.NewGuid();
+
+        [XmlAttribute]
         public int Health { get; set; }
+
+        [XmlAttribute]
+        public int InitiativeOrder { get; set; }
         public CharacterModel Character { get; set; } = new CharacterModel();
 
         public static bool operator==(CombatantModel? a, CombatantModel? b )
