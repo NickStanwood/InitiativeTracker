@@ -15,13 +15,12 @@ namespace InitiativeTracker
         public ObservableCollection<Combatant> Combatants { get; set; } = new ObservableCollection<Combatant>();
         public CombatantModel? ActiveCombatant { get { return _m.ActiveCombatant; } set { _m.ActiveCombatant = value; Notify(); } }
 
-        private bool _combatRunning = false;
         public bool CombatRunning
         {
-            get { return _combatRunning; }
+            get { return _m.CombatRunning; }
             set 
             {
-                _combatRunning = value; 
+                _m.CombatRunning = value; 
                 Notify();
                 Notify(nameof(CharacterWidth));
                 Notify(nameof(CombatWidth));
@@ -36,6 +35,10 @@ namespace InitiativeTracker
             : base(new EncounterModel())
         {}
 
+        public Encounter(EncounterModel model)
+            : base(model)
+        { }
+        
         protected override void Initialize()
         {
             TieModelListToViewModelList(_m.PlayerCharacters, PlayerCharacters);

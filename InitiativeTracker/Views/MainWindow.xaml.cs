@@ -91,6 +91,23 @@ namespace InitiativeTracker
             Model.EndCombat();
         }
 
+        private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "XML file (*.xml)|*.xml";
+
+            if (ofd.ShowDialog() == true)
+            {
+                EncounterModel? model = XmlSerializer.Deserialize(ofd.FileName);
+                if (model != null)
+                {
+                    Model = new Encounter(model);
+                    this.DataContext = Model;
+                    Model.FilePath = ofd.FileName;
+                }
+            }
+        }
+
         private void MenuItemSave_Click(object sender, RoutedEventArgs e)
         {
             if(Model.FilePath.EndsWith(".xml"))
@@ -114,5 +131,6 @@ namespace InitiativeTracker
                 XmlSerializer.Serialize(Model.FilePath, Model.GetModel());
             }
         }
+
     }
 }
