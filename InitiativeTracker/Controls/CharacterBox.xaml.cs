@@ -19,7 +19,9 @@ namespace InitiativeTracker
     /// Interaction logic for CharacterBox.xaml
     /// </summary>
     public partial class CharacterBox : UserControl
-    {        
+    {
+        public event EventHandler<CharacterCopyEventArgs> CharacterCopied;
+
         public CharacterBox()
         {
             InitializeComponent();
@@ -29,5 +31,17 @@ namespace InitiativeTracker
         {
             return DataContext as Character;
         }
+
+        private void BtnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterModel? c = GetViewModel()?.GetModel().Clone();
+            CharacterCopyEventArgs ce = new CharacterCopyEventArgs { CopiedCharacter = c };
+            CharacterCopied?.Invoke(this, ce);
+        }
+    }
+
+    public class CharacterCopyEventArgs : EventArgs
+    {
+        public CharacterModel? CopiedCharacter { get; set; }
     }
 }

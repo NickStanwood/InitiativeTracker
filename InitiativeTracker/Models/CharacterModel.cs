@@ -61,10 +61,10 @@ namespace InitiativeTracker
 
         public static bool operator ==(CharacterModel? a, CharacterModel? b)
         {
-            if (a == null && b == null)
+            if (a is null && b is null)
                 return true;
 
-            if (a != null)
+            if (a is not null)
                 return a.Equals(b);
 
             return false;

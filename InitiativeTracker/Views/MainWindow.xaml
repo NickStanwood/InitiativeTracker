@@ -38,7 +38,7 @@
         </Menu>
 
         <!-- Character list -->
-        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource Deck}" Margin="3" IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}">
+        <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource Deck}" Margin="8,3,8,3" IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -54,7 +54,7 @@
                  ItemsSource="{Binding PlayerCharacters}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
+                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -62,7 +62,7 @@
         </Border>
 
         <!-- Combat List -->
-        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Deck}" Margin="3" Background="{Binding Path=CombatRunning, Converter={StaticResource EnableToBackground}}">
+        <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Deck}" Margin="8,3,8,3" Background="{Binding Path=CombatRunning, Converter={StaticResource EnableToBackground}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -70,8 +70,9 @@
                     <RowDefinition Height="{Binding CombatRunning, Converter={StaticResource EnableToMaxHeight}}"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Style="{StaticResource titleLabel}"
-               Content="Combat Tracker" FontWeight="Bold"
-               HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                       Visibility="{Binding Path=CombatRunning, Converter={StaticResource BoolToVisibility}}"
+                       Content="Combat Tracker" FontWeight="Bold"
+                       HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 <Button Grid.Row="1"
                         Margin="20,3,20,3" Height="50"
                         IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}"
@@ -106,7 +107,7 @@
 
 
         <!-- NPC list -->
-        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource Deck}" Margin="3" IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}">
+        <Border Grid.Row="1" Grid.Column="2" Style="{StaticResource Deck}" Margin="8,3,8,3" IsEnabled="{Binding Path=CombatRunning, Converter={StaticResource InverseBoolConverter}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -131,7 +132,7 @@
                  ItemsSource="{Binding DMCharacters}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <local:CharacterBox MouseDown="CharacterBox_MouseDown"/>
+                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
