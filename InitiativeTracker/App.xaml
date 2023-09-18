@@ -5,6 +5,7 @@
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!--  Color Scheme -->
             <Color x:Key="Text">#FFFFFF</Color>
             <Color x:Key="Background">#1C1D22</Color>   <!-- Window  -->
             <Color x:Key="Primary">#25262D</Color>      <!-- Decks   -->
@@ -50,6 +51,8 @@
             <SolidColorBrush x:Key="CardBackground" Color="{StaticResource Secondary}"/>
             <SolidColorBrush x:Key="CardInactive">#00000000</SolidColorBrush>
 
+            
+            <!--Styles-->
             <Style x:Key="WindowBase" TargetType="Window">
                 <Setter Property="Background" Value="{StaticResource WindowBackground}"/>
             </Style>
@@ -113,6 +116,10 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style TargetType="Button" x:Key="ImageButton">
+                
             </Style>
 
             <Style TargetType="CheckBox">
@@ -232,6 +239,9 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            
+            <!-- Resources -->
+            <BitmapImage x:Key="CopyIcon" UriSource="Resources/copy.png"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

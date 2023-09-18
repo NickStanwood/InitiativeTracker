@@ -70,7 +70,7 @@
                     <RowDefinition Height="{Binding CombatRunning, Converter={StaticResource EnableToMaxHeight}}"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Style="{StaticResource titleLabel}"
-                       Visibility="{Binding CombatRunning}"
+                       Visibility="{Binding Path=CombatRunning, Converter={StaticResource BoolToVisibility}}"
                        Content="Combat Tracker" FontWeight="Bold"
                        HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
                 <Button Grid.Row="1"
@@ -132,7 +132,7 @@
                  ItemsSource="{Binding DMCharacters}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown"/>
+                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

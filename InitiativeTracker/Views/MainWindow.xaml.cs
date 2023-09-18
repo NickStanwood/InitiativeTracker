@@ -81,9 +81,14 @@ namespace InitiativeTracker
             if (match.Success)
                 name = match.Groups[1].Value;
 
-            int copyNum = 1;
+            //check which list the character should be added to
+            var characterList = Model.PlayerCharacters;
+            if (e.CopiedCharacter.Type == CharacterType.DMControlled)
+                characterList = Model.DMCharacters;
+
             //check all player characters for the same name
-            foreach (Character c in Model.PlayerCharacters)
+            int copyNum = 1;
+            foreach (Character c in characterList)
             {
                 Match m = reg.Match(c.Name);
                 if (m.Success && m.Groups[1].Value == name)
@@ -96,7 +101,7 @@ namespace InitiativeTracker
             }
 
             e.CopiedCharacter.Name = name + " " + copyNum.ToString();
-            Model.PlayerCharacters.Add(new Character(e.CopiedCharacter));
+            characterList.Add(new Character(e.CopiedCharacter));
         }
 
         private void BtnRollInit_Click(object sender, RoutedEventArgs e)
