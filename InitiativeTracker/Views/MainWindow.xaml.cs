@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,6 +67,36 @@ namespace InitiativeTracker
                 
                 }
             }
+        }
+        private void CharacterBox_Copied(object sender, CharacterCopyEventArgs e)
+        {
+            if (e.CopiedCharacter == null)
+                return;
+
+            string name = e.CopiedCharacter.Name;
+
+            //check if names ends with a digit. increase it by 1 if it does
+            Regex reg = new Regex(@"(.*)\s+(\d+)$");
+            Match match = reg.Match(e.CopiedCharacter.Name);
+            if (match.Success)
+                name = match.Groups[1].Value;
+
+            int copyNum = 1;
+            //check all player characters for the same name
+            foreach (Character c in Model.PlayerCharacters)
+            {
+                Match m = reg.Match(c.Name);
+                if (m.Success && m.Groups[1].Value == name)
+                {
+                    //of all the matching characters. largest number and increase it by 1
+                    int num = int.Parse(m.Groups[2].Value);
+                    if(num >= copyNum)
+                        copyNum = num + 1;
+                }
+            }
+
+            e.CopiedCharacter.Name = name + " " + copyNum.ToString();
+            Model.PlayerCharacters.Add(new Character(e.CopiedCharacter));
         }
 
         private void BtnRollInit_Click(object sender, RoutedEventArgs e)

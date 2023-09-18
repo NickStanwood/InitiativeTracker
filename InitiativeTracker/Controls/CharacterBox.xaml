@@ -17,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -42,6 +43,7 @@
                      ToolTip="{Binding Path=Initiative, Converter={StaticResource InitiativeMathConverter}}"
                      Visibility="{Binding Path=IsEnabled, Converter={StaticResource EnabledToVisibilityConverter}}">
             </TextBox>
+            <Button Grid.Row="2" Grid.Column="1" Margin="3" Click="BtnCopy_Click">Copy</Button>
         </Grid>
     </Border>
 </UserControl>
