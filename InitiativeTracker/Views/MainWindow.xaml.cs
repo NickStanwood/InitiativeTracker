@@ -114,7 +114,7 @@ namespace InitiativeTracker
 
         private void BtnStartCombat_Click(object sender, RoutedEventArgs e)
         {
-            Model.CreateCombatList();
+            Model.StartCombat(400);
         }
 
         private void BtnNextTurn_Click(object sender, RoutedEventArgs e)

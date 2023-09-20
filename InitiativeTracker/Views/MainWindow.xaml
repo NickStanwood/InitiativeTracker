@@ -96,11 +96,11 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <Button Grid.Column="1" Grid.Row="0" Click="BtnNextTurn_Click">Next Turn</Button>
+                    <Button Grid.Column="1" Grid.Row="0" Height="30" Margin="20,10,20,0" Click="BtnNextTurn_Click">Next Turn</Button>
                     <local:CombatDetailBox Grid.Column="1" Grid.Row="1" 
                                      Margin="3,10,3,10"
                                      DataContext="{Binding ActiveCombatant}"/>
-                    <Button Grid.Column="1" Grid.Row="2" Click="BtnEndCombat_Click">End Combat</Button>
+                    <Button Grid.Column="1" Grid.Row="2" Height="30" Margin="20,0,20,10" Click="BtnEndCombat_Click" >End Combat</Button>
                 </Grid>
             </Grid>
         </Border>

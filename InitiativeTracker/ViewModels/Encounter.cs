@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace InitiativeTracker
@@ -26,8 +27,24 @@ namespace InitiativeTracker
                 Notify(nameof(CombatWidth));
             }
         }
-        public string CharacterWidth { get { return CombatRunning ? "*" : "2*"; } }
-        public string CombatWidth { get { return CombatRunning ? "3*" : "*"; } }
+
+
+        private static readonly int _defaultCharacterWidth = 2;
+        private string _characterWidth = _defaultCharacterWidth.ToString() + "*";
+        public string CharacterWidth 
+        { 
+            get 
+            { 
+                return _characterWidth; 
+            }
+            set
+            {
+                _characterWidth = value;
+                Notify();
+            }
+        }
+
+        public string CombatWidth { get { return "*"; } }
 
         private string _filePath = "";
         public string FilePath { get { return _filePath; } set { _filePath = value; Notify(); } }
@@ -46,7 +63,36 @@ namespace InitiativeTracker
             TieModelListToViewModelList(_m.Combatants, Combatants);
         }
 
-        public void CreateCombatList()
+        public void StartCombat(int milliseconds)
+        {
+            if (CombatRunning || !CreateCombatList())
+                return;
+
+            Thread t = new Thread(() =>
+            {
+                float start = _defaultCharacterWidth;
+                float end = 0;
+                float deltaVal = 0.05f;
+
+                int deltaTime = (int)(milliseconds * deltaVal / (start - end));
+                if (deltaTime <= 0)
+                    deltaTime = 1;
+
+                float width = start;
+                while (width > end)
+                {
+                    width -= deltaVal;
+                    if(width < end)
+                        width = end;
+                    CharacterWidth = width + "*";
+                    Thread.Sleep(deltaTime);
+                }
+            });
+
+            t.Start();
+        }
+
+        public bool CreateCombatList()
         {
             List<Character> characters = new List<Character>();
             foreach(Character c in DMCharacters)
@@ -61,7 +107,7 @@ namespace InitiativeTracker
             }
 
             if (characters.Count == 0)
-                return;
+                return false;
 
             characters.Sort((a,b) =>
             {
@@ -96,6 +142,7 @@ namespace InitiativeTracker
             }
             CombatRunning = true;
             GoToNextCombatant();
+            return true;
         }
 
         public void GoToNextCombatant()
@@ -116,6 +163,7 @@ namespace InitiativeTracker
             Combatants.Clear();
             ActiveCombatant = null;
             CombatRunning = false;
+            CharacterWidth = _defaultCharacterWidth.ToString() + "*";
         }
     }
 }
