@@ -68,23 +68,29 @@ namespace InitiativeTracker
                 }
             }
         }
-        private void CharacterBox_Copied(object sender, CharacterCopyEventArgs e)
+        private void CharacterBox_Copied(object sender, CharacterEventArgs e)
         {
-            if (e.CopiedCharacter == null)
+            if (e.Character == null)
                 return;
-
-            string name = e.CopiedCharacter.Name;
-
-            //check if names ends with a digit. increase it by 1 if it does
-            Regex reg = new Regex(@"(.*)\s+(\d+)$");
-            Match match = reg.Match(e.CopiedCharacter.Name);
-            if (match.Success)
-                name = match.Groups[1].Value;
 
             //check which list the character should be added to
             var characterList = Model.PlayerCharacters;
-            if (e.CopiedCharacter.Type == CharacterType.DMControlled)
+            if (e.Character.Type == CharacterType.DMControlled)
                 characterList = Model.DMCharacters;
+
+            //check if the name is not a valid name to copy
+            string name = e.Character.Name;
+            if(name is null || name.Length == 0)
+            {
+                characterList.Add(new Character(e.Character));
+                return;
+            }
+
+            //check if names ends with a digit. increase it by 1 if it does
+            Regex reg = new Regex(@"(.*)\s+(\d+)$");
+            Match match = reg.Match(e.Character.Name);
+            if (match.Success)
+                name = match.Groups[1].Value;
 
             //check all player characters for the same name
             int copyNum = 1;
@@ -100,8 +106,8 @@ namespace InitiativeTracker
                 }
             }
 
-            e.CopiedCharacter.Name = name + " " + copyNum.ToString();
-            characterList.Add(new Character(e.CopiedCharacter));
+            e.Character.Name = name + " " + copyNum.ToString();
+            characterList.Add(new Character(e.Character));
         }
 
         private void BtnRollInit_Click(object sender, RoutedEventArgs e)

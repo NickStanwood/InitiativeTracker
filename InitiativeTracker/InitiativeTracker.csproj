@@ -9,12 +9,16 @@
 
   <ItemGroup>
     <None Remove="Resources\copy.png" />
+    <None Remove="Resources\delete.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\copy.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Resources\copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

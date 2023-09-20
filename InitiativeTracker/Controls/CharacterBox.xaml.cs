@@ -20,7 +20,8 @@ namespace InitiativeTracker
     /// </summary>
     public partial class CharacterBox : UserControl
     {
-        public event EventHandler<CharacterCopyEventArgs> CharacterCopied;
+        public event EventHandler<CharacterEventArgs> CharacterCopied;
+        public event EventHandler<CharacterEventArgs> CharacterDeleted;
 
         public CharacterBox()
         {
@@ -35,13 +36,20 @@ namespace InitiativeTracker
         private void BtnCopy_Click(object sender, RoutedEventArgs e)
         {
             CharacterModel? c = GetViewModel()?.GetModel().Clone();
-            CharacterCopyEventArgs ce = new CharacterCopyEventArgs { CopiedCharacter = c };
+            CharacterEventArgs ce = new CharacterEventArgs { Character = c };
             CharacterCopied?.Invoke(this, ce);
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterModel? c = GetViewModel()?.GetModel().Clone();
+            CharacterEventArgs ce = new CharacterEventArgs { Character = c };
+            CharacterDeleted?.Invoke(this, ce);
         }
     }
 
-    public class CharacterCopyEventArgs : EventArgs
+    public class CharacterEventArgs : EventArgs
     {
-        public CharacterModel? CopiedCharacter { get; set; }
+        public CharacterModel? Character { get; set; }
     }
 }

@@ -29,6 +29,9 @@
                 <Button Margin="3" Click="BtnCopy_Click" Width="20" Height="20">
                     <Image Source="{StaticResource CopyIcon}" Width="14" Height="14"/>
                 </Button>
+                <Button Click="BtnDelete_Click" Width="20" Height="20">
+                    <Image Source="{StaticResource DeleteIcon}" Width="14" Height="14"/>
+                </Button>
             </StackPanel>
             
             <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource headerLabel}"
