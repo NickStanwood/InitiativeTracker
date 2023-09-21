@@ -243,6 +243,7 @@
             <!-- Resources -->
             <BitmapImage x:Key="CopyIcon" UriSource="pack://application:,,,/InitiativeTracker;component/Resources/copy.png"/>
             <BitmapImage x:Key="DeleteIcon" UriSource="pack://application:,,,/InitiativeTracker;component/Resources/delete.png"/>
+            <BitmapImage x:Key="AddIcon" UriSource="pack://application:,,,/InitiativeTracker;component/Resources/add.png"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

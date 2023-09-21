@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace InitiativeTracker
 {
     public class Combatant : ViewModelBase<CombatantModel>
     {
         public int Health { get { return _m.Health; } set { _m.Health = value; Notify(); } }
+        public ObservableCollection<Status> Statuses { get; set; } = new ObservableCollection<Status>();
+
         public Character Character { get; set; }
 
         public Combatant() : base()
@@ -25,6 +28,7 @@ namespace InitiativeTracker
         protected override void Initialize()
         {
             Character = new Character(_m.Character);
+            TieModelListToViewModelList(_m.Statuses, Statuses);
         }
     }
 }
