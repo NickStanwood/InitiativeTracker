@@ -54,7 +54,7 @@
                  ItemsSource="{Binding PlayerCharacters}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied"/>
+                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied" CharacterDeleted="CharacterBox_Deleted"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -132,7 +132,7 @@
                  ItemsSource="{Binding DMCharacters}" HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied"/>
+                            <local:CharacterBox MouseLeftButtonDown="CharacterBox_MouseDown" CharacterCopied="CharacterBox_Copied" CharacterDeleted="CharacterBox_Deleted"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

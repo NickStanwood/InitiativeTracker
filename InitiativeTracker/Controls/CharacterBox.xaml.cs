@@ -42,7 +42,7 @@ namespace InitiativeTracker
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            CharacterModel? c = GetViewModel()?.GetModel().Clone();
+            CharacterModel? c = GetViewModel()?.GetModel();
             CharacterEventArgs ce = new CharacterEventArgs { Character = c };
             CharacterDeleted?.Invoke(this, ce);
         }

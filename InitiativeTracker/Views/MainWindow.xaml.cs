@@ -110,6 +110,30 @@ namespace InitiativeTracker
             characterList.Add(new Character(e.Character));
         }
 
+        private void CharacterBox_Deleted(object sender, CharacterEventArgs e)
+        {
+            if (e.Character == null)
+                return;
+
+            //check which list the character should be deleted from
+            var characterList = Model.PlayerCharacters;
+            if (e.Character.Type == CharacterType.DMControlled)
+                characterList = Model.DMCharacters;
+
+            Character? characterToDelete = null;
+            foreach(Character c in characterList)
+            {
+                if(e.Character == c.GetModel())
+                {
+                    characterToDelete = c;
+                    break;
+                }
+            }
+
+            if(characterToDelete != null)
+                characterList.Remove(characterToDelete);
+        }
+
         private void BtnRollInit_Click(object sender, RoutedEventArgs e)
         {
             foreach(Character c in Model.DMCharacters)
