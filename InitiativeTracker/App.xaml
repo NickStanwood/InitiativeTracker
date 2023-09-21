@@ -241,7 +241,8 @@
             </Style>
             
             <!-- Resources -->
-            <BitmapImage x:Key="CopyIcon" UriSource="Resources/copy.png"/>
+            <BitmapImage x:Key="CopyIcon" UriSource="pack://application:,,,/InitiativeTracker;component/Resources/copy.png"/>
+            <BitmapImage x:Key="DeleteIcon" UriSource="pack://application:,,,/InitiativeTracker;component/Resources/delete.png"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

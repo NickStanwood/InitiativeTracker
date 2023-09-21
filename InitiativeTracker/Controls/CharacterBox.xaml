@@ -26,8 +26,11 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.RowSpan="3" Orientation="Vertical">
-                <Button Margin="3" Click="BtnCopy_Click" Width="20" Height="20">
-                    <Image Source="{StaticResource CopyIcon}" Width="14" Height="14"/>
+                <Button Margin="3" Click="BtnCopy_Click" Width="16" Height="16">
+                    <Image Source="{StaticResource CopyIcon}" Width="10" Height="10"/>
+                </Button>
+                <Button Click="BtnDelete_Click" Width="16" Height="16">
+                    <Image Source="{StaticResource DeleteIcon}" Width="10" Height="10"/>
                 </Button>
             </StackPanel>
             
