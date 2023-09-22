@@ -15,12 +15,15 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*" MinWidth="250"/>
+                <ColumnDefinition Width="50" MaxWidth="50"/>
             </Grid.ColumnDefinitions>
             
+            <!-- Name -->
             <Label Grid.Row="0" Style="{StaticResource headerLabel}"
                    HorizontalContentAlignment="Right" 
                    Content="{Binding Character.Name}"/>
@@ -28,6 +31,7 @@
             <CheckBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,3,0"
                       IsChecked="{Binding Path=Character.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
+            <!-- Health -->
             <Label Grid.Row="1" HorizontalContentAlignment="Right" 
                    Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                    Content="Health"/>
@@ -35,12 +39,34 @@
                      Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                      Text="{Binding Health}" />
 
+            <!-- AC -->
             <Label Grid.Row="2" HorizontalContentAlignment="Right"
                    Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                     Content="AC"/>
             <Label Grid.Row="2" Grid.Column="1"
                      Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"
                      Content="{Binding Character.AC}" />
+            
+            <!-- Status effects -->
+            <Label Grid.Row="3" HorizontalContentAlignment="Right"
+                    Content="Statuses"/>
+            <Button Grid.Row="3" Grid.Column="1" 
+                    Height="16" Width="16" HorizontalAlignment="Left" Click="BtnAddStatus_Click">
+                <Image Source="{StaticResource AddIcon}" Height="8" Width="8"/>
+            </Button>
+
+            <ItemsControl Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding Statuses}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" MaxWidth="300" HorizontalAlignment="Right"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:StatusEditBox/>
+                    </DataTemplate>                    
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </Border>
 </UserControl>

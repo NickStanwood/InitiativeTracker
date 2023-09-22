@@ -24,5 +24,15 @@ namespace InitiativeTracker
         {
             InitializeComponent();
         }
+
+        public Combatant? GetViewModel()
+        {
+            return DataContext as Combatant;
+        }
+
+        private void BtnAddStatus_Click(object sender, RoutedEventArgs e)
+        {
+            GetViewModel()?.Statuses.Add(new Status { Rounds = 1, IsEditing = true });
+        }
     }
 }

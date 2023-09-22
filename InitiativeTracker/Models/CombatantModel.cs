@@ -19,6 +19,7 @@ namespace InitiativeTracker
         public int InitiativeOrder { get; set; }
         public CharacterModel Character { get; set; } = new CharacterModel();
 
+        public List<StatusModel> Statuses = new List<StatusModel>();
         public static bool operator==(CombatantModel? a, CombatantModel? b )
         {
             if (a is null && b is null)
