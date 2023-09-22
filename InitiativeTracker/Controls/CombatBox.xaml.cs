@@ -32,7 +32,7 @@ namespace InitiativeTracker
 
         private void BtnAddStatus_Click(object sender, RoutedEventArgs e)
         {
-            GetViewModel()?.Statuses.Add(new Status { Name = "Test", Rounds = 5 });
+            GetViewModel()?.Statuses.Add(new Status { Rounds = 1, IsEditing = true });
         }
     }
 }

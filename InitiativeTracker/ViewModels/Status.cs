@@ -11,6 +11,9 @@ namespace InitiativeTracker
         public string Name { get { return _m.Name; } set { _m.Name = value; Notify(); } }
         public int Rounds { get { return _m.Rounds; } set { _m.Rounds = value; Notify(); } }
 
+        private bool _isEditing = false;
+        public bool IsEditing { get { return _isEditing; } set { _isEditing = value; Notify(); } }
+
         public Status() : base(new StatusModel()) { }
         public Status(StatusModel status) : base(status) { }
         protected override void Initialize()
