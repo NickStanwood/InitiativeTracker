@@ -152,7 +152,10 @@ namespace InitiativeTracker
 
             //put previously active combatant at bottom of initiative order
             if(ActiveCombatant != null)
+            {
+                ActiveCombatant.DecreaseStatusRounds();
                 Combatants.Add(new Combatant(ActiveCombatant));
+            }
 
             ActiveCombatant = Combatants[0].GetModel();
             Combatants.RemoveAt(0);

@@ -20,6 +20,17 @@ namespace InitiativeTracker
         public CharacterModel Character { get; set; } = new CharacterModel();
 
         public List<StatusModel> Statuses = new List<StatusModel>();
+
+        public void DecreaseStatusRounds()
+        {
+            for(int i = Statuses.Count - 1; i >= 0; i--)
+            {
+                Statuses[i].Rounds--;
+                if(Statuses[i].Rounds <= 0)
+                    Statuses.RemoveAt(i);
+            }
+        }
+
         public static bool operator==(CombatantModel? a, CombatantModel? b )
         {
             if (a is null && b is null)

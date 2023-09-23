@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <local:CharacterTypeVisibilityConverter x:Key="VisibilityConverter"/>
     </UserControl.Resources>
-    <Border Style="{StaticResource Card}">
+    <Border Style="{StaticResource Deck}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
