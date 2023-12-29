@@ -33,6 +33,9 @@ namespace InitiativeTracker
         [XmlAttribute]
         public int HP { get; set; }
 
+        [XmlAttribute]
+        public string Notes { get; set; }
+
         public InitiativeModel Initiative { get; set; } = new InitiativeModel();
         public List<AttackModel> Attacks { get; set; } = new List<AttackModel>();
 
@@ -44,6 +47,7 @@ namespace InitiativeTracker
                 Name = Name,
                 AC = AC,
                 HP = HP,
+                Notes = Notes,
                 Initiative = Initiative.Clone(),
                 Attacks = Attacks.Clone()
             };
@@ -54,6 +58,7 @@ namespace InitiativeTracker
             Name = source.Name;
             AC = source.AC;
             HP = source.HP;
+            Notes = source.Notes;
             Initiative = source.Initiative.Clone();
             Attacks = source.Attacks.Clone();
         }

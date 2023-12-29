@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitiativeTracker"
         mc:Ignorable="d"
         Title="New Character" 
-        Height="300" Width="300" SizeToContent="Height">
+        Height="400" Width="300" MinWidth="300" MinHeight="400">
     <Window.Resources>
         <local:CharacterTypeVisibilityConverter x:Key="TypeVisibilityConverter" />        
     </Window.Resources>
@@ -21,6 +21,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
@@ -70,7 +72,11 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <Button Grid.Row="6" Grid.ColumnSpan="2" Margin="10"
+        <Label Grid.Row="6" HorizontalContentAlignment="Right">Notes</Label>
+        <TextBox Grid.Row="7" Grid.ColumnSpan="2"
+                 AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Notes}"/>
+        
+        <Button Grid.Row="8" Grid.ColumnSpan="2" Margin="10"
                 VerticalAlignment="Top"
                 Click="BtnSave_Click">Save</Button>
     </Grid>

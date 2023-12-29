@@ -18,6 +18,8 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -70,6 +72,9 @@
                      IsReadOnly="True"
                      Visibility="{Binding Path=Character.Type, Converter={StaticResource VisibilityConverter}}"/>
 
+            <Label Grid.Row="6" Grid.ColumnSpan="2" HorizontalContentAlignment="Center">Notes</Label>
+            <TextBox Grid.Row="7" Grid.ColumnSpan="2"
+                 AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Character.Notes}"/>
         </Grid>
     </Border>
 </UserControl>
